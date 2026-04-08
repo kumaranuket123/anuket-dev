@@ -26,8 +26,8 @@ jobs:
         run: flutter pub get
 
       - name: Build Web App
-        # Building with the base-href set to the repository name for GitHub Pages
-        run: flutter build web --base-href /anuket-dev/ --release
+        # Building without base-href because custom domains mount at root (/)
+        run: flutter build web --release
 
       - name: Fix GoRouter Deep Linking (404.html hack)
         run: cp build/web/index.html build/web/404.html
