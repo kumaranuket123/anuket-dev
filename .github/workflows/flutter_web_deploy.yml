@@ -17,22 +17,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Clean build
-        run: flutter clean
-
+      # ✅ Install Flutter FIRST
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
 
+      # ✅ Now Flutter is available
+      - name: Clean build
+        run: flutter clean
+
       - name: Install Dependencies
         run: flutter pub get
 
       - name: Build Web App
-        # Building without base-href because custom domains mount at root (/)
         run: flutter build web --release --web-renderer canvaskit
 
-      - name: Fix GoRouter Deep Linking (404.html hack)
+      - name: Fix GoRouter Deep Linking
         run: cp build/web/index.html build/web/404.html
 
       - name: Add CNAME
