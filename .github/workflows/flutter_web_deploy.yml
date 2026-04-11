@@ -31,7 +31,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Web App
-        run: flutter build web --release --web-renderer canvaskit
+        run: flutter build web --release
 
       - name: Fix GoRouter Deep Linking
         run: cp build/web/index.html build/web/404.html
