@@ -11,8 +11,45 @@
     "sectionTitle": "About Me",
     "description1": "I am a passionate software engineer focused on crafting robust mobile and web applications. My expertise lies in architecting complex Flutter projects, implementing clean state management, and seamlessly integrating backend services to deliver flawless user experiences.",
     "description2": "Beyond just writing code, I actively collaborate with cross-functional teams to drive product innovation and establish engineering best practices. When I'm not building apps, you can find me exploring new tech, traveling, or enjoying a long walk in the park.",
-    "skills": ["Flutter (Mobile & Web)", "Dart", "State Management (BLoC/Provider)", "Firebase Integration", "RESTful APIs", "Native iOS/Android dev", "Git & CI/CD", "Agile Methodologies"],
+    "skills": [
+      "Flutter (Mobile & Web)",
+      "Dart",
+      "State Management (BLoC/Provider)",
+      "Firebase Integration",
+      "RESTful APIs",
+      "Native iOS/Android dev",
+      "Git & CI/CD",
+      "Agile Methodologies"
+    ],
     "profileIcon": "person"
+  },
+  "experience": {
+    "sectionTitle": "Experience",
+    "jobs": [
+      {
+        "company": "FiftyFive Technologies",
+        "role": "Flutter Developer",
+        "duration": "April 2023 - Present",
+        "location": "Jaipur, Rajasthan, India",
+        "description": [
+          "Spearheaded the development of a dynamic customer dashboard, enhancing user engagement by 30%.",
+          "Collaborated with cross-functional teams to implement responsive design principles, ensuring seamless user experiences across various devices.",
+          "Introduced and implemented API integration and best practices in code reviews, resulting in a 20% improvement in code quality and faster development cycles.",
+          "Utilized advanced Dart concepts to create modular and reusable UI components, streamlining the development process and reducing time-to-market.",
+          "Actively participated in Agile ceremonies, fostering a collaborative and efficient development environment.",
+          "Analyzed user feedback to drive continuous improvement and user satisfaction."
+        ]
+      },
+      {
+        "company": "Chakraborty and Lahkar Innovations Pvt. Ltd.",
+        "role": "Android Developer Intern",
+        "duration": "March 2023 - May 2023",
+        "location": "India",
+        "description": [
+          "Played a critical role in implementing application designs and collaborating on cross-platform features to support product launches."
+        ]
+      }
+    ]
   },
   "projects": {
     "sectionTitle": "Recent Work",
@@ -20,13 +57,14 @@
     "personalProjectsTitle": "Personal Projects",
     "clientProjects": [
       {
-        "id": "e-commerce-solution",
         "title": "E-Commerce Solution",
         "description": "A responsive e-commerce web platform integrating backend services for real-time inventory and payments. Designed to provide a seamless shopping experience with a modern checkout flow for a retail client.",
-        "fullDescription": "This comprehensive E-Commerce platform was built from the ground up to support a rapidly scaling retail business. The goal was to overcome the limitations of their previous monolithic architecture by introducing a robust, decoupled Flutter Web frontend powered by Firebase. We engineered a seamless cart experience, incorporated an advanced filtering engine, and implemented secure, real-time credit card processing through Stripe. The final product saw a 45% increase in mobile web conversions and cut latency times in half.",
-        "features": ["Real-time inventory sync", "Secure Stripe checkout", "Responsive glassmorphism UI", "Dynamic category filtering", "Offline caching"],
-        "screenshots": ["https://via.placeholder.com/800x500/151B2B/00F2FE?text=Cart+View", "https://via.placeholder.com/800x500/151B2B/00F2FE?text=Product+Details"],
-        "techStack": ["Flutter Web", "Firebase", "Stripe API", "Provider"],
+        "techStack": [
+          "Flutter Web",
+          "Firebase",
+          "Stripe API",
+          "Provider"
+        ],
         "githubLink": "",
         "externalLink": "https://github.com",
         "imageUrl": "https://via.placeholder.com/600x400/151B2B/00F2FE?text=E-Commerce+Solution"
@@ -34,13 +72,14 @@
     ],
     "personalProjects": [
       {
-        "id": "lend-mate",
         "title": "Lend Mate",
         "description": "A comprehensive loan management application built to help users manage debts and view schedules. Features complex local state management, dynamic PDF report generation, and extra payment tracking.",
-        "fullDescription": "Lend Mate was conceived out of the frustration of dealing with clunky banking apps that don't easily allow users to visualize the impact of extra principal payments. I engineered this application to calculate complex loan amortizations instantly on-device. The app manages vast amounts of local state using the BLoC pattern to ensure UI responsiveness. Key technical achievements include a custom-built PDF generation engine that allows users to export and share their payment schedules directly from their phone.",
-        "features": ["Instant amortization calculations", "Local state with BLoC", "Custom PDF Report Generation", "Dark/Light mode support", "Extra payment forecasting"],
-        "screenshots": ["https://via.placeholder.com/800x500/151B2B/00F2FE?text=Amortization+Table", "https://via.placeholder.com/800x500/151B2B/00F2FE?text=PDF+Export"],
-        "techStack": ["Flutter", "Dart", "BLoC Pattern", "PDF Generation", "SQLite"],
+        "techStack": [
+          "Flutter",
+          "Dart",
+          "BLoC Pattern",
+          "PDF Generation"
+        ],
         "githubLink": "https://github.com",
         "externalLink": "https://github.com",
         "imageUrl": "https://via.placeholder.com/600x400/151B2B/00F2FE?text=Lend+Mate+Application"
