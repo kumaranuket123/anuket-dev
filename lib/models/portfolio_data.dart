@@ -28,6 +28,7 @@ class HeroData {
   final String description;
   final String buttonText;
   final String resumeLink;
+  final String imagePath;
 
   HeroData({
     required this.greeting,
@@ -36,6 +37,7 @@ class HeroData {
     required this.description,
     required this.buttonText,
     required this.resumeLink,
+    required this.imagePath,
   });
 
   factory HeroData.fromJson(Map<String, dynamic> json) {
@@ -46,6 +48,7 @@ class HeroData {
       description: json['description'] ?? '',
       buttonText: json['buttonText'] ?? '',
       resumeLink: json['resumeLink'] ?? '',
+      imagePath: json['imagePath'] ?? '',
     );
   }
 }
@@ -76,7 +79,6 @@ class AboutData {
   }
 }
 
-
 class ProjectsData {
   final String sectionTitle;
   final String clientProjectsTitle;
@@ -94,11 +96,15 @@ class ProjectsData {
 
   factory ProjectsData.fromJson(Map<String, dynamic> json) {
     var clientList = json['clientProjects'] as List? ?? [];
-    List<ProjectItem> clientProjects = clientList.map((i) => ProjectItem.fromJson(i)).toList();
-    
+    List<ProjectItem> clientProjects = clientList
+        .map((i) => ProjectItem.fromJson(i))
+        .toList();
+
     var personalList = json['personalProjects'] as List? ?? [];
-    List<ProjectItem> personalProjects = personalList.map((i) => ProjectItem.fromJson(i)).toList();
-    
+    List<ProjectItem> personalProjects = personalList
+        .map((i) => ProjectItem.fromJson(i))
+        .toList();
+
     return ProjectsData(
       sectionTitle: json['sectionTitle'] ?? '',
       clientProjectsTitle: json['clientProjectsTitle'] ?? '',
@@ -114,11 +120,15 @@ class ProjectItem {
   final String title;
   final String description;
   final String fullDescription;
+  final List<String> userHighlights;
+  final List<String> developerHighlights;
   final List<String> features;
   final List<String> screenshots;
   final List<String> techStack;
   final String githubLink;
   final String externalLink;
+  final String androidDownloadLink;
+  final String iosDownloadLink;
   final String imageUrl;
 
   ProjectItem({
@@ -126,11 +136,15 @@ class ProjectItem {
     required this.title,
     required this.description,
     required this.fullDescription,
+    required this.userHighlights,
+    required this.developerHighlights,
     required this.features,
     required this.screenshots,
     required this.techStack,
     required this.githubLink,
     required this.externalLink,
+    required this.androidDownloadLink,
+    required this.iosDownloadLink,
     required this.imageUrl,
   });
 
@@ -140,11 +154,16 @@ class ProjectItem {
       title: json['title'] ?? '',
       description: json['description'] ?? '',
       fullDescription: json['fullDescription'] ?? '',
+      userHighlights: List<String>.from(json['userHighlights'] ?? []),
+      developerHighlights: List<String>.from(json['developerHighlights'] ?? []),
       features: List<String>.from(json['features'] ?? []),
       screenshots: List<String>.from(json['screenshots'] ?? []),
       techStack: List<String>.from(json['techStack'] ?? []),
       githubLink: json['githubLink'] ?? '',
       externalLink: json['externalLink'] ?? '',
+      androidDownloadLink:
+          json['androidDownloadLink'] ?? json['downloadLink'] ?? '',
+      iosDownloadLink: json['iosDownloadLink'] ?? '',
       imageUrl: json['imageUrl'] ?? '',
     );
   }

@@ -5,7 +5,8 @@
     "role": "Senior Flutter Developer",
     "description": "I specialize in building scalable, high-performance cross-platform applications. With over 3 years of experience, I transform complex business requirements into elegant, user-centric mobile and web solutions using Flutter and Dart.",
     "buttonText": "Check out my work!",
-    "resumeLink": "https://example.com/resume.pdf"
+    "resumeLink": "https://drive.google.com/file/d/1sQwiL1_V68rpZStdjenik6Zm42Hecvi3/view?usp=drive_link",
+    "imagePath": "assets/images/my_pic.png"
   },
   "about": {
     "sectionTitle": "About Me",
@@ -21,7 +22,7 @@
       "Git & CI/CD",
       "Agile Methodologies"
     ],
-    "profileIcon": "person"
+    "profileIcon": "assets/images/my_pic.png"
   },
   "experience": {
     "sectionTitle": "Experience",
@@ -55,34 +56,58 @@
     "sectionTitle": "Recent Work",
     "clientProjectsTitle": "Client Projects",
     "personalProjectsTitle": "Personal Projects",
-    "clientProjects": [
-      {
-        "title": "E-Commerce Solution",
-        "description": "A responsive e-commerce web platform integrating backend services for real-time inventory and payments. Designed to provide a seamless shopping experience with a modern checkout flow for a retail client.",
-        "techStack": [
-          "Flutter Web",
-          "Firebase",
-          "Stripe API",
-          "Provider"
-        ],
-        "githubLink": "",
-        "externalLink": "https://github.com",
-        "imageUrl": "https://via.placeholder.com/600x400/151B2B/00F2FE?text=E-Commerce+Solution"
-      }
-    ],
     "personalProjects": [
       {
+        "id": "lend-mate",
         "title": "Lend Mate",
         "description": "A comprehensive loan management application built to help users manage debts and view schedules. Features complex local state management, dynamic PDF report generation, and extra payment tracking.",
+        "fullDescription": "LendMate is a peer-to-peer loan tracking app built to help individuals manage personal loans with transparency between borrower and lender. The app supports loan creation, EMI scheduling, proof-based payment approvals, extra payments, reminders, and complete payment history so both parties can always see the latest loan status.",
+        "userHighlights": [
+          "Create and manage personal loans with amount, interest rate, tenure, EMI date, and start date.",
+          "View separate dashboards for loans you borrowed and loans you lent.",
+          "Track EMI status, next due date, remaining balance, and completed payments in one place.",
+          "Mark EMIs as paid, upload payment proof, and wait for lender approval for transparent reconciliation.",
+          "Make extra payments and choose whether they reduce total interest or reduce loan tenure.",
+          "Store optional UPI IDs for borrower and lender to simplify repayment coordination."
+        ],
+        "developerHighlights": [
+          "Structured around a layered Flutter architecture with models, repositories, BLoC/Cubit state management, and feature-based UI modules.",
+          "Uses Supabase for backend services, Supabase Auth for authentication, and Supabase Storage for payment proof uploads.",
+          "Implements EMI calculations, dynamic repayment updates, and extra payment recalculation logic for reducing tenure or interest impact.",
+          "Supports real-time sync for loan and payment status so both parties stay updated without manual refresh cycles.",
+          "Designed for extensibility with future support for PDF reports, group loans, AI reminders, UPI integration, and late-fee logic."
+        ],
+        "features": [
+          "Loan creation with principal, annual interest, tenure, EMI date, start date, borrower selection, and optional UPI IDs.",
+          "Automatic EMI, total interest, and total repayment amount calculation.",
+          "Dual-role experience where one user can be a lender in one loan and a borrower in another.",
+          "Borrower payment workflow with screenshot proof upload and lender-side approval.",
+          "EMI tracking with pending, paid, and approved states plus next due date visibility.",
+          "Complete payment history with proof records and filtering by time period.",
+          "Reminder and notification flow for due EMIs, approvals, and extra payments.",
+          "Dashboard summary for borrowed amount, lent amount, upcoming payments, and overall repayment visibility."
+        ],
+        "screenshots": [
+          "assets/images/lendmate_app_view.png",
+          "assets/images/Screenshot_20260412_185252.png",
+          "assets/images/Screenshot_20260412_185321.png",
+          "assets/images/Screenshot_20260412_185335.png",
+          "assets/images/Screenshot_20260412_185344.png"
+        ],
         "techStack": [
           "Flutter",
           "Dart",
           "BLoC Pattern",
-          "PDF Generation"
+          "Supabase",
+          "Supabase Auth",
+          "Supabase Storage",
+          "Local Notifications"
         ],
         "githubLink": "https://github.com",
         "externalLink": "https://github.com",
-        "imageUrl": "https://via.placeholder.com/600x400/151B2B/00F2FE?text=Lend+Mate+Application"
+        "androidDownloadLink": "https://drive.google.com/file/d/17GUaFjxBkvWt2KFHIW0zhkGKxfovxQ8k/view?usp=drive_link",
+        "iosDownloadLink": "",
+        "imageUrl": "assets/images/lendmate_app_view.png"
       }
     ]
   },
@@ -91,14 +116,13 @@
     "title": "Let's Work Together",
     "description": "I'm currently taking on new clients and exciting freelance projects. If you have a business problem that needs a technical solution, or if you simply want to discuss an idea, my inbox is always open. Let's make it happen!",
     "buttonText": "Send an Email",
-    "email": "kumaranuket123@gmail.com",
+    "email": "chalesramanewton@gmail.com",
     "subject": "Inquiry: Let's build an app together",
     "meetingButtonText": "Schedule a Google Meet",
-    "meetingLink": "https://calendar.google.com/calendar/appointments/schedules/",
+    "meetingLink": "https://cal.com/anuket/15min?overlayCalendar=true",
     "socials": {
-      "github": "https://github.com/",
-      "linkedin": "https://www.linkedin.com/in/anuket-kumar",
-      "twitter": "https://twitter.com/"
+      "github": "https://github.com/kumaranuket123",
+      "linkedin": "https://www.linkedin.com/in/anuket-kumar/"
     },
     "footerText": "Designed & Built by Anuket Kumar"
   }

@@ -14,21 +14,15 @@ class ContactSection extends StatelessWidget {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
       path: data.email,
-      queryParameters: {
-        'subject': data.subject,
-      },
+      queryParameters: {'subject': data.subject},
     );
-    if (await canLaunchUrl(emailLaunchUri)) {
-      await launchUrl(emailLaunchUri);
-    }
+    await launchUrl(emailLaunchUri);
   }
 
   void _launchUrl(String url) async {
     if (url.isEmpty) return;
     final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
+    await launchUrl(uri, webOnlyWindowName: '_blank');
   }
 
   @override
@@ -37,7 +31,9 @@ class ContactSection extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: isMobile ? 20 : 100, vertical: 80),
+        horizontal: isMobile ? 20 : 100,
+        vertical: 80,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -82,7 +78,10 @@ class ContactSection extends StatelessWidget {
                   backgroundColor: AppColors.primary.withOpacity(0.1),
                   foregroundColor: AppColors.primary,
                   side: const BorderSide(color: AppColors.primary),
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 20,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -101,7 +100,10 @@ class ContactSection extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: AppColors.background,
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40,
+                      vertical: 20,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -128,8 +130,7 @@ class ContactSection extends StatelessWidget {
                   hoverColor: AppColors.primary,
                   onPressed: () => _launchUrl(data.socials.github),
                 ),
-              if (data.socials.github.isNotEmpty)
-                const SizedBox(width: 20),
+              if (data.socials.github.isNotEmpty) const SizedBox(width: 20),
               if (data.socials.linkedin.isNotEmpty)
                 IconButton(
                   icon: const FaIcon(FontAwesomeIcons.linkedin),
@@ -137,8 +138,7 @@ class ContactSection extends StatelessWidget {
                   hoverColor: AppColors.primary,
                   onPressed: () => _launchUrl(data.socials.linkedin),
                 ),
-              if (data.socials.linkedin.isNotEmpty)
-                const SizedBox(width: 20),
+              if (data.socials.linkedin.isNotEmpty) const SizedBox(width: 20),
               if (data.socials.twitter.isNotEmpty)
                 IconButton(
                   icon: const FaIcon(FontAwesomeIcons.twitter),
