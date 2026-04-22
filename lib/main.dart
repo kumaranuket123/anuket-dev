@@ -6,6 +6,7 @@ import 'screens/portfolio_screen.dart';
 import 'screens/project_detail_screen.dart';
 import 'models/portfolio_data.dart';
 import 'theme/app_colors.dart';
+import 'screens/auth_callback_screen.dart';
 
 void main() {
   usePathUrlStrategy();
@@ -48,6 +49,10 @@ class MyApp extends StatelessWidget {
               final id = state.pathParameters['id']!;
               return ProjectDetailScreen(projectId: id);
             },
+          ),
+          GoRoute(
+            path: '/callback',
+            builder: (context, state) => const AuthCallbackPage(),
           ),
         ],
       ),
