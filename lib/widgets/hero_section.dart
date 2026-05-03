@@ -246,46 +246,61 @@ class _HeroFallback extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.surface,
-      padding: const EdgeInsets.all(28),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(18),
-            ),
-            child: const Icon(
-              Icons.code_rounded,
-              color: AppColors.primary,
-              size: 32,
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final w = constraints.maxWidth;
+        final padding = (w * 0.10).clamp(14.0, 28.0);
+        final iconSize = (w * 0.18).clamp(32.0, 64.0);
+        final titleSize = (w * 0.072).clamp(11.0, 28.0);
+        final subtitleSize = (w * 0.050).clamp(9.0, 15.0);
+        final gap = (w * 0.04).clamp(6.0, 12.0);
+
+        return Container(
+          color: AppColors.surface,
+          padding: EdgeInsets.all(padding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: iconSize,
+                height: iconSize,
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(iconSize * 0.28),
+                ),
+                child: Icon(
+                  Icons.code_rounded,
+                  color: AppColors.primary,
+                  size: iconSize * 0.5,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                'Building reliable Flutter products for mobile and web.',
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.outfit(
+                  color: AppColors.textPrimary,
+                  fontSize: titleSize,
+                  fontWeight: FontWeight.w600,
+                  height: 1.2,
+                ),
+              ),
+              SizedBox(height: gap),
+              Text(
+                'Clean architecture, thoughtful UX, and practical execution from idea to shipped product.',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.inter(
+                  color: AppColors.textSecondary,
+                  fontSize: subtitleSize,
+                  height: 1.5,
+                ),
+              ),
+            ],
           ),
-          const Spacer(),
-          Text(
-            'Building reliable Flutter products for mobile and web.',
-            style: GoogleFonts.outfit(
-              color: AppColors.textPrimary,
-              fontSize: 28,
-              fontWeight: FontWeight.w600,
-              height: 1.2,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'Clean architecture, thoughtful UX, and practical execution from idea to shipped product.',
-            style: GoogleFonts.inter(
-              color: AppColors.textSecondary,
-              fontSize: 15,
-              height: 1.7,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

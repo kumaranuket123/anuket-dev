@@ -287,12 +287,15 @@ class _TechChip extends StatelessWidget {
         children: [
           const Icon(Icons.arrow_outward, color: AppColors.primary, size: 14),
           const SizedBox(width: 8),
-          Text(
-            name,
-            style: GoogleFonts.inter(
-              color: AppColors.textPrimary,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
+          Flexible(
+            child: Text(
+              name,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.inter(
+                color: AppColors.textPrimary,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ],
