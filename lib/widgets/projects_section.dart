@@ -160,7 +160,10 @@ class _ProjectFeaturedState extends State<_ProjectFeatured> {
 
   Widget _buildImageWidget() {
     if (_usesAssetImage) {
-      return Image.asset(widget.item.imageUrl, fit: BoxFit.contain);
+      return Image.asset(
+          widget.item.imageUrl,
+          fit: BoxFit.fitHeight,
+      );
     }
 
     return Image.network(

@@ -48,6 +48,7 @@ class ContactSection extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             data.title,
+            textAlign: TextAlign.center,
             style: GoogleFonts.outfit(
               color: AppColors.textPrimary,
               fontSize: isMobile ? 40 : 60,
@@ -67,6 +68,7 @@ class ContactSection extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 20),
           Wrap(
             spacing: 20,
             runSpacing: 20,

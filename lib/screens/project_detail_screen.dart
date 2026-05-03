@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/portfolio_data.dart';
 import '../theme/app_colors.dart';
 import '../utils/responsive.dart';
+import '../widgets/image_viewer.dart';
 
 class ProjectDetailScreen extends StatefulWidget {
   final String projectId;
@@ -61,7 +62,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
     String imagePath, {
     double? width,
     double? height,
-    BoxFit fit = BoxFit.cover,
+    BoxFit fit = BoxFit.fitHeight,
   }) {
     if (_isNetworkImage(imagePath)) {
       return Image.network(
@@ -223,7 +224,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                         child: _buildProjectImage(
                           item.imageUrl,
                           width: double.infinity,
-                          height: isMobile ? 250 : 500,
+                          height: isMobile ? 350 : 500,
                         ),
                       ),
                       const SizedBox(height: 40),
@@ -475,26 +476,57 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: isMobile ? 1 : 2,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20,
-                                childAspectRatio: 16 / 9,
-                              ),
-                          itemCount: item.screenshots.length,
-                          itemBuilder: (context, index) {
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: _buildProjectImage(
-                                item.screenshots[index],
-                                fit: BoxFit.cover,
-                              ),
-                            );
-                          },
+                        Center(
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: isMobile ? 1 : 2,
+                                  crossAxisSpacing: 20,
+                                  mainAxisSpacing: 20,
+                                  childAspectRatio: 9 / 16,
+                                ),
+                            itemCount: item.screenshots.length,
+                            itemBuilder: (context, index) {
+                              return MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => ImageViewer(
+                                        images: item.screenshots,
+                                        initialIndex: index,
+                                      ),
+                                    );
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Stack(
+                                      children: [
+                                        _buildProjectImage(
+                                          item.screenshots[index],
+                                          fit: BoxFit.fitHeight,
+                                        ),
+                                        // Hover overlay
+                                        Container(
+                                          color: Colors.black.withOpacity(0),
+                                          child: const Center(
+                                            child: Icon(
+                                              Icons.zoom_in_rounded,
+                                              color: Colors.white,
+                                              size: 32,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                         const SizedBox(height: 60),
                       ],

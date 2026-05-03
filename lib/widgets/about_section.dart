@@ -102,11 +102,11 @@ class AboutSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(flex: 3, child: _AboutCopyCard(data: data)),
-                    const SizedBox(width: 36),
-                    Expanded(
-                      flex: 2,
-                      child: _AboutProfileCard(image: _buildProfileVisual()),
-                    ),
+                    // const SizedBox(width: 36),
+                    // Expanded(
+                    //   flex: 2,
+                    //   child: _AboutProfileCard(image: _buildProfileVisual()),
+                    // ),
                   ],
                 ),
         ],
@@ -285,8 +285,12 @@ class _TechChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.arrow_outward, color: AppColors.primary, size: 14),
-          const SizedBox(width: 8),
+          const SizedBox(
+            width: 14,
+            height: 14,
+            child: Icon(Icons.arrow_outward, color: AppColors.primary, size: 14),
+          ),
+          const SizedBox(width: 6),
           Flexible(
             child: Text(
               name,
