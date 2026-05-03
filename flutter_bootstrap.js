@@ -35,8 +35,30 @@ if (!window._flutter) {
 }
 _flutter.buildConfig = {"engineRevision":"42d3d75a56efe1a2e9902f52dc8006099c45d937","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"},{}]};
 
+
+// Detect Instagram in-app browser and other restricted WebViews
+const ua = navigator.userAgent || '';
+const isInstagram = ua.includes('Instagram');
+const isRestricted = isInstagram
+  || ua.includes('FBAN')       // Facebook
+  || ua.includes('FBAV')       // Facebook
+  || ua.includes('Twitter')
+  || ua.includes('LinkedInApp');
+
+// Always use HTML renderer — CanvasKit requires WASM + heavy JS that
+// Instagram and other in-app browsers block or fail to load silently.
+const renderer = 'html';
+
 _flutter.loader.load({
   serviceWorkerSettings: {
-    serviceWorkerVersion: "1037464540" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */
-  }
+    serviceWorkerVersion: "1052132021" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */,
+  },
+  onEntrypointLoaded: async function (engineInitializer) {
+    const appRunner = await engineInitializer.initializeEngine({
+      renderer: renderer,
+      // Disable service worker in restricted WebViews — they often block it
+      useColorEmoji: true,
+    });
+    await appRunner.runApp();
+  },
 });
