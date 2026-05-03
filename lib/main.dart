@@ -16,46 +16,48 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static final _router = GoRouter(
+    initialLocation: '/',
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const PortfolioScreen(),
+      ),
+      GoRoute(
+        path: '/project/:id',
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          return ProjectDetailScreen(projectId: id);
+        },
+      ),
+      GoRoute(
+        path: '/callback',
+        builder: (context, state) => const AuthCallbackPage(),
+      ),
+    ],
+  );
+
+  static final _theme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColors.primary,
+      brightness: Brightness.dark,
+      surface: AppColors.background,
+    ),
+    scaffoldBackgroundColor: AppColors.background,
+    useMaterial3: true,
+    textTheme: GoogleFonts.interTextTheme().apply(
+      bodyColor: AppColors.textPrimary,
+      displayColor: AppColors.textPrimary,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Anuket | Flutter Developer',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.primary,
-          brightness: Brightness.dark,
-          surface: AppColors.background,
-        ),
-        scaffoldBackgroundColor: AppColors.background,
-        useMaterial3: true,
-        textTheme: GoogleFonts.interTextTheme(
-          Theme.of(context).textTheme,
-        ).apply(
-          bodyColor: AppColors.textPrimary,
-          displayColor: AppColors.textPrimary,
-        ),
-      ),
-      routerConfig: GoRouter(
-        initialLocation: '/',
-        routes: [
-          GoRoute(
-            path: '/',
-            builder: (context, state) => const PortfolioScreen(),
-          ),
-          GoRoute(
-            path: '/project/:id',
-            builder: (context, state) {
-              final id = state.pathParameters['id']!;
-              return ProjectDetailScreen(projectId: id);
-            },
-          ),
-          GoRoute(
-            path: '/callback',
-            builder: (context, state) => const AuthCallbackPage(),
-          ),
-        ],
-      ),
+      theme: _theme,
+      routerConfig: _router,
     );
   }
 }

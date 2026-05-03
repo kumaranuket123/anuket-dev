@@ -27,11 +27,15 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   final GlobalKey _contactKey = GlobalKey();
 
   Future<PortfolioData>? _portfolioDataFuture;
+  String? _resumeLink;
 
   @override
   void initState() {
     super.initState();
     _portfolioDataFuture = _loadPortfolioData();
+    _portfolioDataFuture?.then((data) {
+      setState(() => _resumeLink = data.hero.resumeLink);
+    });
   }
 
   Future<PortfolioData> _loadPortfolioData() async {
@@ -61,7 +65,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.background.withOpacity(0.92),
+        backgroundColor: AppColors.background.withValues(alpha: 0.92),
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -79,17 +83,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 _NavBarItem(index: 2, title: 'Work', onTap: () => _scrollToSection(_projectsKey)),
                 _NavBarItem(index: 3, title: 'Contact', onTap: () => _scrollToSection(_contactKey)),
                 const SizedBox(width: 20),
-                Builder(
-                  builder: (context) {
-                    return FutureBuilder<PortfolioData>(
-                      future: _portfolioDataFuture,
-                      builder: (_, snapshot) {
-                        final resumeLink = snapshot.data?.hero.resumeLink ?? '';
-                        return _ResumeButton(url: resumeLink);
-                      },
-                    );
-                  },
-                ),
+                _ResumeButton(url: _resumeLink ?? ''),
                 const SizedBox(width: 20),
               ],
       ),
@@ -120,13 +114,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                           _scrollToSection(_contactKey);
                         }),
                         const SizedBox(height: 20),
-                        FutureBuilder<PortfolioData>(
-                          future: _portfolioDataFuture,
-                          builder: (_, snapshot) {
-                            final resumeLink = snapshot.data?.hero.resumeLink ?? '';
-                            return _ResumeButton(url: resumeLink);
-                          },
-                        ),
+                        _ResumeButton(url: _resumeLink ?? ''),
                       ],
                     ),
                   ),
@@ -166,16 +154,14 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                     constraints: const BoxConstraints(maxWidth: 1200),
                     child: Column(
                       children: [
-                        Container(
+                        HeroSection(
                           key: _homeKey,
-                          child: HeroSection(
-                            data: data.hero,
-                            onWorkTap: () => _scrollToSection(_projectsKey),
-                          ),
+                          data: data.hero,
+                          onWorkTap: () => _scrollToSection(_projectsKey),
                         ),
-                        Container(key: _aboutKey, child: AboutSection(data: data.about)),
-                        Container(key: _projectsKey, child: ProjectsSection(data: data.projects)),
-                        Container(key: _contactKey, child: ContactSection(data: data.contact)),
+                        AboutSection(key: _aboutKey, data: data.about),
+                        ProjectsSection(key: _projectsKey, data: data.projects),
+                        ContactSection(key: _contactKey, data: data.contact),
                       ],
                     ),
                   ),
@@ -193,22 +179,19 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 class _GradientLogoText extends StatelessWidget {
   const _GradientLogoText();
 
+  static const _gradient = LinearGradient(
+    colors: [AppColors.primary, AppColors.secondary],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  );
+  static final _style = GoogleFonts.firaCode(fontWeight: FontWeight.w700, fontSize: 20);
+
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
       blendMode: BlendMode.srcIn,
-      shaderCallback: (bounds) => LinearGradient(
-        colors: [AppColors.primary, AppColors.secondary],
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
-      ).createShader(bounds),
-      child: Text(
-        '>_ anuket',
-        style: GoogleFonts.firaCode(
-          fontWeight: FontWeight.w700,
-          fontSize: 20,
-        ),
-      ),
+      shaderCallback: (bounds) => _gradient.createShader(bounds),
+      child: Text('>_ anuket', style: _style),
     );
   }
 }
@@ -230,6 +213,11 @@ class _NavBarItem extends StatefulWidget {
 }
 
 class _NavBarItemState extends State<_NavBarItem> {
+  static final _numberStyle = GoogleFonts.firaCode(
+    color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w600);
+  static final _titleStyle = GoogleFonts.inter(
+    fontSize: 14, fontWeight: FontWeight.w500);
+
   bool _isHovered = false;
 
   @override
@@ -249,20 +237,14 @@ class _NavBarItemState extends State<_NavBarItem> {
               if (hasNumber) ...[
                 Text(
                   '${widget.index.toString().padLeft(2, '0')}.',
-                  style: GoogleFonts.firaCode(
-                    color: AppColors.primary,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: _numberStyle,
                 ),
                 const SizedBox(width: 6),
               ],
               Text(
                 widget.title,
-                style: GoogleFonts.inter(
+                style: _titleStyle.copyWith(
                   color: _isHovered ? AppColors.textPrimary : AppColors.textSecondary,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
                 ),
               ),
             ],
@@ -438,11 +420,11 @@ class _DrawerFooter extends StatelessWidget {
 class _GridBackground extends StatelessWidget {
   const _GridBackground();
 
+  static final _painter = _GridPainter();
+
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _GridPainter(),
-    );
+    return CustomPaint(painter: _painter, isComplex: true, willChange: false);
   }
 }
 

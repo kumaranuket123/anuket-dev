@@ -93,8 +93,8 @@ class AboutSection extends StatelessWidget {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _AboutProfileCard(image: _buildProfileVisual()),
-                    const SizedBox(height: 24),
+                    // _AboutProfileCard(image: _buildProfileVisual()),
+                    // const SizedBox(height: 24),
                     _AboutCopyCard(data: data),
                   ],
                 )

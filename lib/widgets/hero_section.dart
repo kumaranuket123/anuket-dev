@@ -12,15 +12,16 @@ class HeroSection extends StatelessWidget {
 
   const HeroSection({required this.data, this.onWorkTap, super.key});
 
-  Future<void> _launchResume() async {
-    if (data.resumeLink.isEmpty) return;
-    final uri = Uri.parse(data.resumeLink);
-    await launchUrl(uri, webOnlyWindowName: '_blank');
-  }
+  static final _badgeStyle = GoogleFonts.inter(
+    color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.w600);
+  static final _descStyle = GoogleFonts.inter(
+    color: AppColors.textSecondary, fontSize: 16, height: 1.8);
+  static final _locationStyle = GoogleFonts.inter(
+    fontSize: 15, fontWeight: FontWeight.w600);
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = Responsive.isMobile(context);
+    final isMobile = MediaQuery.sizeOf(context).width < 768;
 
     return Container(
       padding: EdgeInsets.symmetric(

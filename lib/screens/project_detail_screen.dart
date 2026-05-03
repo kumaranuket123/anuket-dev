@@ -7,7 +7,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/portfolio_data.dart';
 import '../theme/app_colors.dart';
-import '../utils/responsive.dart';
 import '../widgets/image_viewer.dart';
 
 class ProjectDetailScreen extends StatefulWidget {
@@ -21,140 +20,42 @@ class ProjectDetailScreen extends StatefulWidget {
 
 class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
   Future<ProjectItem?>? _projectFuture;
-
-  bool _isNetworkImage(String path) => path.startsWith('http');
+  ProjectItem? _project;
 
   @override
   void initState() {
     super.initState();
     _projectFuture = _loadProject();
+    _projectFuture?.then((item) {
+      if (mounted) setState(() => _project = item);
+    });
   }
 
   Future<ProjectItem?> _loadProject() async {
     final String jsonString = await rootBundle.loadString(
       'assets/data/portfolio_data.json',
     );
-    final Map<String, dynamic> jsonResponse = json.decode(jsonString);
-    final portfolioData = PortfolioData.fromJson(jsonResponse);
+    final portfolioData = PortfolioData.fromJson(json.decode(jsonString));
 
+    final all = [
+      ...portfolioData.projects.clientProjects,
+      ...portfolioData.projects.personalProjects,
+    ];
     try {
-      return portfolioData.projects.clientProjects.firstWhere(
-        (p) => p.id == widget.projectId,
-      );
-    } catch (_) {}
-
-    try {
-      return portfolioData.projects.personalProjects.firstWhere(
-        (p) => p.id == widget.projectId,
-      );
-    } catch (_) {}
-
-    return null;
+      return all.firstWhere((p) => p.id == widget.projectId);
+    } catch (_) {
+      return null;
+    }
   }
 
   void _launchUrl(String url) async {
     if (url.isEmpty) return;
-    final uri = Uri.parse(url);
-    await launchUrl(uri, webOnlyWindowName: '_blank');
-  }
-
-  Widget _buildProjectImage(
-    String imagePath, {
-    double? width,
-    double? height,
-    BoxFit fit = BoxFit.fitHeight,
-  }) {
-    if (_isNetworkImage(imagePath)) {
-      return Image.network(
-        imagePath,
-        width: width,
-        height: height,
-        fit: fit,
-        errorBuilder: (context, error, stackTrace) {
-          return Container(
-            width: width,
-            height: height,
-            color: AppColors.surface,
-            alignment: Alignment.center,
-            child: const Text(
-              'Image Unavailable',
-              style: TextStyle(color: AppColors.textSecondary),
-            ),
-          );
-        },
-      );
-    }
-
-    return Image.asset(
-      imagePath,
-      width: width,
-      height: height,
-      fit: fit,
-      errorBuilder: (context, error, stackTrace) {
-        return Container(
-          width: width,
-          height: height,
-          color: AppColors.surface,
-          alignment: Alignment.center,
-          child: const Text(
-            'Image Unavailable',
-            style: TextStyle(color: AppColors.textSecondary),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildHighlightsSection(String title, List<String> items) {
-    if (items.isEmpty) return const SizedBox.shrink();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: GoogleFonts.outfit(
-            color: AppColors.textPrimary,
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 16),
-        ...items.map(
-          (item) => Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 4, right: 12),
-                  child: Icon(
-                    Icons.check_circle,
-                    color: AppColors.primary,
-                    size: 20,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    item,
-                    style: GoogleFonts.inter(
-                      color: AppColors.textSecondary,
-                      fontSize: 18,
-                      height: 1.5,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
+    await launchUrl(Uri.parse(url), webOnlyWindowName: '_blank');
   }
 
   @override
   Widget build(BuildContext context) {
-    bool isMobile = Responsive.isMobile(context);
+    final isMobile = MediaQuery.sizeOf(context).width < 768;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -171,21 +72,15 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
             }
           },
         ),
-        title: FutureBuilder<ProjectItem?>(
-          future: _projectFuture,
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
-              return Text(
-                snapshot.data!.title,
+        title: _project != null
+            ? Text(
+                _project!.title,
                 style: GoogleFonts.outfit(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.bold,
                 ),
-              );
-            }
-            return const SizedBox();
-          },
-        ),
+              )
+            : const SizedBox.shrink(),
       ),
       body: FutureBuilder<ProjectItem?>(
         future: _projectFuture,
@@ -195,7 +90,8 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
               child: CircularProgressIndicator(color: AppColors.primary),
             );
           }
-          if (!snapshot.hasData || snapshot.data == null) {
+          final item = snapshot.data;
+          if (item == null) {
             return Center(
               child: Text(
                 'Project not found.',
@@ -203,8 +99,6 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
               ),
             );
           }
-
-          final item = snapshot.data!;
 
           return SingleChildScrollView(
             child: Center(
@@ -221,10 +115,11 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                       // Hero Image
                       ClipRRect(
                         borderRadius: BorderRadius.circular(16),
-                        child: _buildProjectImage(
-                          item.imageUrl,
+                        child: _ProjectImage(
+                          path: item.imageUrl,
                           width: double.infinity,
                           height: isMobile ? 350 : 500,
+                          fit: BoxFit.fitHeight,
                         ),
                       ),
                       const SizedBox(height: 40),
@@ -247,10 +142,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                           Row(
                             children: [
                               IconButton(
-                                icon: const Icon(
-                                  Icons.android_rounded,
-                                  size: 28,
-                                ),
+                                icon: const Icon(Icons.android_rounded, size: 28),
                                 color: item.androidDownloadLink.isNotEmpty
                                     ? AppColors.textPrimary
                                     : AppColors.textSecondary,
@@ -259,10 +151,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                                     : null,
                               ),
                               IconButton(
-                                icon: const Icon(
-                                  Icons.phone_iphone_rounded,
-                                  size: 28,
-                                ),
+                                icon: const Icon(Icons.phone_iphone_rounded, size: 28),
                                 color: item.iosDownloadLink.isNotEmpty
                                     ? AppColors.textPrimary
                                     : AppColors.textSecondary,
@@ -272,22 +161,15 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                               ),
                               if (item.githubLink.isNotEmpty)
                                 IconButton(
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.github,
-                                    size: 28,
-                                  ),
+                                  icon: const FaIcon(FontAwesomeIcons.github, size: 28),
                                   color: AppColors.textPrimary,
                                   onPressed: () => _launchUrl(item.githubLink),
                                 ),
                               if (item.externalLink.isNotEmpty)
                                 IconButton(
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.upRightFromSquare,
-                                    size: 28,
-                                  ),
+                                  icon: const FaIcon(FontAwesomeIcons.upRightFromSquare, size: 28),
                                   color: AppColors.textPrimary,
-                                  onPressed: () =>
-                                      _launchUrl(item.externalLink),
+                                  onPressed: () => _launchUrl(item.externalLink),
                                 ),
                             ],
                           ),
@@ -299,30 +181,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                       Wrap(
                         spacing: 12,
                         runSpacing: 12,
-                        children: item.techStack
-                            .map(
-                              (tech) => Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppColors.primary.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(
-                                    color: AppColors.primary.withOpacity(0.3),
-                                  ),
-                                ),
-                                child: Text(
-                                  tech,
-                                  style: GoogleFonts.inter(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            )
-                            .toList(),
+                        children: item.techStack.map((tech) => _TechBadge(tech: tech)).toList(),
                       ),
                       const SizedBox(height: 40),
 
@@ -337,9 +196,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        item.fullDescription.isNotEmpty
-                            ? item.fullDescription
-                            : item.description,
+                        item.fullDescription.isNotEmpty ? item.fullDescription : item.description,
                         style: GoogleFonts.inter(
                           color: AppColors.textSecondary,
                           fontSize: 18,
@@ -357,13 +214,8 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                           foregroundColor: AppColors.background,
                           disabledBackgroundColor: AppColors.surface,
                           disabledForegroundColor: AppColors.textSecondary,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 22,
-                            vertical: 16,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 16),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                         ),
                         icon: const Icon(Icons.android_rounded),
                         label: Text(
@@ -383,89 +235,36 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                           foregroundColor: AppColors.textPrimary,
                           disabledBackgroundColor: AppColors.surface,
                           disabledForegroundColor: AppColors.textSecondary,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 22,
-                            vertical: 16,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14),
-                            side: const BorderSide(
-                              color: AppColors.textSecondary,
-                            ),
+                            side: const BorderSide(color: AppColors.textSecondary),
                           ),
                         ),
                         icon: const Icon(Icons.phone_iphone_rounded),
                         label: Text(
-                          item.iosDownloadLink.isNotEmpty
-                              ? 'Download for iOS'
-                              : 'iOS Coming Soon',
+                          item.iosDownloadLink.isNotEmpty ? 'Download for iOS' : 'iOS Coming Soon',
                           style: GoogleFonts.inter(fontWeight: FontWeight.w700),
                         ),
                       ),
                       const SizedBox(height: 40),
 
                       if (item.userHighlights.isNotEmpty) ...[
-                        _buildHighlightsSection(
-                          'For Users',
-                          item.userHighlights,
-                        ),
+                        _HighlightsSection(title: 'For Users', items: item.userHighlights),
                         const SizedBox(height: 40),
                       ],
 
                       if (item.developerHighlights.isNotEmpty) ...[
-                        _buildHighlightsSection(
-                          'For Developers',
-                          item.developerHighlights,
-                        ),
+                        _HighlightsSection(title: 'For Developers', items: item.developerHighlights),
                         const SizedBox(height: 40),
                       ],
 
-                      // Features Section
                       if (item.features.isNotEmpty) ...[
-                        Text(
-                          "Key Features",
-                          style: GoogleFonts.outfit(
-                            color: AppColors.textPrimary,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        ...item.features.map(
-                          (feature) => Padding(
-                            padding: const EdgeInsets.only(bottom: 12.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 4.0,
-                                    right: 12.0,
-                                  ),
-                                  child: Icon(
-                                    Icons.check_circle,
-                                    color: AppColors.primary,
-                                    size: 20,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    feature,
-                                    style: GoogleFonts.inter(
-                                      color: AppColors.textSecondary,
-                                      fontSize: 18,
-                                      height: 1.5,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        _HighlightsSection(title: 'Key Features', items: item.features),
                         const SizedBox(height: 40),
                       ],
 
-                      // Screenshots Array
+                      // Gallery — Wrap replaces GridView(shrinkWrap:true) to avoid measuring all items upfront
                       if (item.screenshots.isNotEmpty) ...[
                         Text(
                           "Gallery",
@@ -476,57 +275,42 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        Center(
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: isMobile ? 1 : 2,
-                                  crossAxisSpacing: 20,
-                                  mainAxisSpacing: 20,
-                                  childAspectRatio: 9 / 16,
-                                ),
-                            itemCount: item.screenshots.length,
-                            itemBuilder: (context, index) {
-                              return MouseRegion(
-                                cursor: SystemMouseCursors.click,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => ImageViewer(
-                                        images: item.screenshots,
-                                        initialIndex: index,
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            final itemWidth = isMobile
+                                ? constraints.maxWidth
+                                : (constraints.maxWidth - 20) / 2;
+                            final itemHeight = itemWidth * (16 / 9);
+                            return Wrap(
+                              spacing: 20,
+                              runSpacing: 20,
+                              children: List.generate(item.screenshots.length, (index) {
+                                return MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (_) => ImageViewer(
+                                          images: item.screenshots,
+                                          initialIndex: index,
+                                        ),
+                                      );
+                                    },
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: _ProjectImage(
+                                        path: item.screenshots[index],
+                                        width: itemWidth,
+                                        height: itemHeight,
+                                        fit: BoxFit.cover,
                                       ),
-                                    );
-                                  },
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Stack(
-                                      children: [
-                                        _buildProjectImage(
-                                          item.screenshots[index],
-                                          fit: BoxFit.fitHeight,
-                                        ),
-                                        // Hover overlay
-                                        Container(
-                                          color: Colors.black.withOpacity(0),
-                                          child: const Center(
-                                            child: Icon(
-                                              Icons.zoom_in_rounded,
-                                              color: Colors.white,
-                                              size: 32,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
                                     ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
+                                );
+                              }),
+                            );
+                          },
                         ),
                         const SizedBox(height: 60),
                       ],
@@ -538,6 +322,113 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
           );
         },
       ),
+    );
+  }
+}
+
+// Extracted as widget so Flutter can skip rebuilds when path/size unchanged
+class _ProjectImage extends StatelessWidget {
+  final String path;
+  final double? width;
+  final double? height;
+  final BoxFit fit;
+
+  const _ProjectImage({
+    required this.path,
+    this.width,
+    this.height,
+    this.fit = BoxFit.fitHeight,
+  });
+
+  static const _errorStyle = TextStyle(color: AppColors.textSecondary);
+
+  Widget _errorWidget(double? w, double? h) => Container(
+        width: w,
+        height: h,
+        color: AppColors.surface,
+        alignment: Alignment.center,
+        child: const Text('Image Unavailable', style: _errorStyle),
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    if (path.startsWith('http')) {
+      return Image.network(
+        path,
+        width: width,
+        height: height,
+        fit: fit,
+        errorBuilder: (_, __, ___) => _errorWidget(width, height),
+      );
+    }
+    return Image.asset(
+      path,
+      width: width,
+      height: height,
+      fit: fit,
+      errorBuilder: (_, __, ___) => _errorWidget(width, height),
+    );
+  }
+}
+
+// Extracted to StatelessWidget — Flutter skips rebuild when title/items unchanged
+class _HighlightsSection extends StatelessWidget {
+  final String title;
+  final List<String> items;
+
+  const _HighlightsSection({required this.title, required this.items});
+
+  static final _titleStyle = GoogleFonts.outfit(
+    color: AppColors.textPrimary, fontSize: 24, fontWeight: FontWeight.w600);
+  static final _itemStyle = GoogleFonts.inter(
+    color: AppColors.textSecondary, fontSize: 18, height: 1.5);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: _titleStyle),
+        const SizedBox(height: 16),
+        ...items.map(
+          (item) => Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 4, right: 12),
+                  child: Icon(Icons.check_circle, color: AppColors.primary, size: 20),
+                ),
+                Expanded(child: Text(item, style: _itemStyle)),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// Tech badge chip
+class _TechBadge extends StatelessWidget {
+  final String tech;
+
+  const _TechBadge({required this.tech});
+
+  static final _style = GoogleFonts.inter(color: AppColors.primary, fontWeight: FontWeight.w500);
+  static final _decoration = BoxDecoration(
+    color: AppColors.primary.withValues(alpha: 0.1),
+    borderRadius: BorderRadius.circular(20),
+    border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: _decoration,
+      child: Text(tech, style: _style),
     );
   }
 }
