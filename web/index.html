@@ -22,7 +22,17 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="A new Flutter project.">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  </style>
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -52,6 +62,17 @@
     For more details:
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
+  <script>
+    // Instagram IAB and other in-app browsers misreport 100vh (their UI chrome
+    // is not subtracted). Force body height to the real visible height instead.
+    (function () {
+      function fixViewportHeight() {
+        document.body.style.height = window.innerHeight + 'px';
+      }
+      fixViewportHeight();
+      window.addEventListener('resize', fixViewportHeight);
+    }());
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 
