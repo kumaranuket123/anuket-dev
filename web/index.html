@@ -2,78 +2,134 @@
 <html>
 
 <head>
-  <div id="loading">
-    <p>Loading Anuket Portfolio...</p>
-  </div>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-  </style>
+  <!-- Preconnect to Google Fonts CDN early to reduce latency -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- iOS meta tags & icons -->
+  <!-- Preload the three font families used by the app so they are cached
+       before Flutter boots. Instagram's WebView often blocks runtime font
+       fetches; loading them from the HTML head bypasses that restriction. -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;500;600;700&display=swap">
+
+  <!-- iOS / PWA -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="anuket_portfolio">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Anuket Kumar">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
+  <!-- SEO & Social -->
   <title>Anuket Kumar | Flutter Developer</title>
-
-  <meta name="description" content="Flutter Developer Portfolio of Anuket Kumar">
-
-  <meta property="og:title" content="Anuket Kumar Portfolio">
+  <meta name="description" content="Senior Flutter Developer building scalable cross-platform apps. Portfolio of Anuket Kumar.">
+  <meta property="og:title" content="Anuket Kumar | Flutter Developer">
+  <meta property="og:description" content="Senior Flutter Developer building scalable cross-platform mobile and web apps.">
   <meta property="og:image" content="preview.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Anuket Kumar | Flutter Developer">
+  <meta name="twitter:image" content="preview.png">
 
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      height: 100%;
+      /* Do NOT use overflow:hidden on html — it breaks scrolling in WebViews */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background-color: #0B0F19;
+    }
+
+    /* Loading screen shown before Flutter boots */
+    #flutter-loading {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #0B0F19;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+
+    #flutter-loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #00F2FE;
+      margin: 0 4px;
+      animation: bounce 1.2s infinite ease-in-out;
+    }
+
+    .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40%            { transform: scale(1.0); opacity: 1.0; }
+    }
+  </style>
 </head>
 
 <body>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
+  <!-- Shown while Flutter initialises; hidden once the app is ready -->
+  <div id="flutter-loading">
+    <div class="loading-dot"></div>
+    <div class="loading-dot"></div>
+    <div class="loading-dot"></div>
+  </div>
 
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
   <script>
-    // Instagram IAB and other in-app browsers misreport 100vh (their UI chrome
-    // is not subtracted). Force body height to the real visible height instead.
+    // Fix Instagram IAB and other in-app browser 100vh mis-reporting.
+    // Their UI chrome is not subtracted, so window.innerHeight gives the
+    // true usable height. We apply it as a CSS custom property instead of
+    // setting body height directly — Flutter reads the canvas size from the
+    // layout, not from body.style.height.
     (function () {
-      function fixViewportHeight() {
-        document.body.style.height = window.innerHeight + 'px';
+      function setVh() {
+        document.documentElement.style.setProperty('--vh', window.innerHeight + 'px');
       }
-      fixViewportHeight();
-      window.addEventListener('resize', fixViewportHeight);
+      setVh();
+      window.addEventListener('resize', setVh);
     }());
-  </script>
+
+</script>
+
   <script src="flutter_bootstrap.js" async></script>
+
+  <script>
+    // Remove the loading screen once Flutter signals it is ready.
+    window.addEventListener('flutter-first-frame', function () {
+      const loader = document.getElementById('flutter-loading');
+      if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(() => loader.remove(), 350);
+      }
+    });
+  </script>
 </body>
 
 </html>
