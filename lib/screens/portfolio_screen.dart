@@ -9,6 +9,8 @@ import '../widgets/hero_section.dart';
 import '../widgets/about_section.dart';
 import '../widgets/projects_section.dart';
 import '../widgets/contact_section.dart';
+// TODO: AI Chat — import added for ChatBubble overlay
+import '../widgets/chat_bubble.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -57,7 +59,12 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   Widget build(BuildContext context) {
     bool isMobile = Responsive.isMobile(context);
 
-    return Scaffold(
+    // TODO: AI Chat — existing Scaffold wrapped in a Stack so ChatBubble can
+    // float above all content (including the AppBar) without modifying the
+    // Scaffold itself. ChatBubble manages its own positioning internally.
+    return Stack(
+      children: [
+        Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: AppColors.background.withOpacity(0.9),
@@ -160,7 +167,12 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           );
         },
       ),
-    );
+        ), // end Scaffold
+        // TODO: AI Chat Overlay — ChatBubble provides the floating button and
+        // slide-up chat panel; floats above the AppBar and all page content.
+        const ChatBubble(),
+      ], // end Stack children
+    ); // end Stack
   }
 }
 
