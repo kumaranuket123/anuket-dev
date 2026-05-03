@@ -88,11 +88,12 @@
           "Dashboard summary for borrowed amount, lent amount, upcoming payments, and overall repayment visibility."
         ],
         "screenshots": [
-          "assets/images/lendmate_app_view.png",
-          "assets/images/Screenshot_20260412_185252.png",
-          "assets/images/Screenshot_20260412_185321.png",
-          "assets/images/Screenshot_20260412_185335.png",
-          "assets/images/Screenshot_20260412_185344.png"
+          "assets/images/lendmate/dashboard-portrait.png",
+          "assets/images/lendmate/create_lone-portrait.png",
+          "assets/images/lendmate/lone_details-portrait.png",
+          "assets/images/lendmate/new_lone-portrait.png",
+          "assets/images/lendmate/notification-portrait.png",
+          "assets/images/lendmate/settings-portrait.png"
         ],
         "techStack": [
           "Flutter",
@@ -103,11 +104,10 @@
           "Supabase Storage",
           "Local Notifications"
         ],
-        "githubLink": "https://github.com",
-        "externalLink": "https://github.com",
+        "githubLink": "https://github.com/kumaranuket123/lend_mate",
         "androidDownloadLink": "https://drive.google.com/file/d/17GUaFjxBkvWt2KFHIW0zhkGKxfovxQ8k/view?usp=drive_link",
         "iosDownloadLink": "",
-        "imageUrl": "assets/images/lendmate_app_view.png"
+        "imageUrl": "assets/images/lendmate/dashboard-portrait.png"
       }
     ]
   },
