@@ -109,7 +109,9 @@
           "Custom Painters",
           "Monorepo (local packages)"
         ],
-        "imageUrl": "assets/images/arena/arena_app.png",
+        "imageUrl": "https://youtube.com/shorts/mxmH6qmHMZQ?feature=share",
+        "androidDownloadLink": "https://drive.google.com/file/d/1HfOVLuyR63BY86QSVKjR6dI_EzGK68Ec/view?usp=drive_link",
+        "iosDownloadLink": "",
         "screenshots": [
           "assets/images/arena/a1.png",
           "assets/images/arena/a2.png",
@@ -274,6 +276,36 @@
       }
     ]
   },
+  "certificates": [
+    {
+      "title": "Customer Hero",
+      "issuer": "FiftyFive Technologies",
+      "date": "22 May 2026",
+      "description": "refers to an individual or entity that goes above and beyond to provide exceptional\nservice and support to customers. This term highlights a strong commitment to\ncustomer satisfaction, problem-solving, and creating positive experiences. A customer\nhero is characterized by their proactive approach, empathy, and dedication to\naddressing customer needs and exceeding their expectations. Their actions often result\nin increased customer loyalty and positive word-of-mouth for the organization.",
+      "imageUrl": "assets/images/certificates/c1.jpg"
+    },
+    {
+      "title": "Performance Excellence",
+      "issuer": "FiftyFive Technologies",
+      "date": "04 Dec 2025",
+      "description": "The outstanding achievements and high-level performance demonstrated by an\nindividual. This term highlights exceptional skills, consistent high-quality work, and\nsignificant contributions that surpass standard expectations, often resulting in\nrecognition, awards, or promotions. It emphasizes excellence in performance and the\nattainment of peak results.",
+      "imageUrl": "assets/images/certificates/c2.jpg"
+    },
+    {
+      "title": "FiftyFive's Collaborative Champions",
+      "issuer": "FiftyFive Technologies",
+      "date": "20 June 2025",
+      "description": "refers to the team players or an individual who worked collaboratively and effectively\nwith others to achieve common goals. This term highlights qualities such as\ncooperation, communication, reliability, and a willingness to put the team's success\nabove personal ambitions. A team player is characterized by their supportive attitude,\nability to work well with diverse personalities, and commitment to fostering a positive\nand productive team environment.",
+      "imageUrl": "assets/images/certificates/c3.jpg"
+    },
+    {
+      "title": "Team Player",
+      "issuer": "FiftyFive Technologies",
+      "date": "27 Oct 2023",
+      "description": "For the one who supports and collaborates the work of the team.",
+      "imageUrl": "assets/images/certificates/c4.jpg"
+    }
+  ],
   "contact": {
     "heading": "Ready to Start?",
     "title": "Let's Work Together",
