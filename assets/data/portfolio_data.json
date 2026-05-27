@@ -2,25 +2,29 @@
   "hero": {
     "greeting": "Hi, I am",
     "name": "Anuket Kumar",
-    "role": "Senior Flutter Developer",
-    "description": "I specialize in building scalable, high-performance cross-platform applications. With over 3 years of experience, I transform complex business requirements into elegant, user-centric mobile and web solutions using Flutter and Dart.",
+    "role": "Flutter Developer",
+    "description": "Flutter Developer with 3+ years of experience building cross-platform apps for international clients across sports-tech, fintech, smart-city, healthcare, and e-commerce. Expert in Clean Architecture, BLoC/Riverpod, real-time SSE systems, custom visualizations, and scalable monorepo design — consistently delivering polished, production-grade apps on Android, iOS, and Flutter Web.",
     "buttonText": "Check out my work!",
-    "resumeLink": "https://drive.google.com/file/d/1sQwiL1_V68rpZStdjenik6Zm42Hecvi3/view?usp=drive_link",
+    "resumeLink": "https://drive.google.com/file/d/1Xr0fr_0vQCbzrBYYAE1I6LCgz6Ey43p0/view?usp=drivesdk",
     "imagePath": "assets/images/my_pic.png"
   },
   "about": {
     "sectionTitle": "About Me",
-    "description1": "I am a passionate software engineer focused on crafting robust mobile and web applications. My expertise lies in architecting complex Flutter projects, implementing clean state management, and seamlessly integrating backend services to deliver flawless user experiences.",
-    "description2": "Beyond just writing code, I actively collaborate with cross-functional teams to drive product innovation and establish engineering best practices. When I'm not building apps, you can find me exploring new tech, traveling, or enjoying a long walk in the park.",
+    "description1": "I am a Flutter Developer with 3+ years of experience architecting and shipping production-grade cross-platform applications for international clients. My expertise spans Clean Architecture, BLoC/Riverpod state management, real-time data systems, and custom UI visualizations — delivering pixel-perfect apps across Android, iOS, and Flutter Web.",
+    "description2": "Beyond writing code, I actively lead code reviews, drive engineering best practices, and collaborate closely with designers, backend engineers, and QA in Agile sprints. I leverage AI tools like Claude and GitHub Copilot to shorten iteration cycles and continuously push the quality bar higher.",
     "skills": [
-      "Flutter (Mobile & Web)",
-      "Dart",
-      "State Management (BLoC/Provider)",
-      "Firebase Integration",
-      "RESTful APIs",
-      "Native iOS/Android dev",
-      "Git & CI/CD",
-      "Agile Methodologies"
+      "Flutter (Android, iOS, Web)",
+      "Dart & Clean Architecture",
+      "BLoC / Cubit / Riverpod",
+      "Firebase & Supabase",
+      "REST APIs, SSE & JWT Auth",
+      "GoRouter, Dio & dartz",
+      "Custom Painters & Animations",
+      "Monorepo & Multi-flavor Builds",
+      "GitHub Actions CI/CD",
+      "Unit / Widget / Integration Testing",
+      "Push Notifications & Geolocation",
+      "Agile / Scrum"
     ],
     "profileIcon": "assets/images/my_pic.png"
   },
@@ -31,37 +35,132 @@
         "company": "FiftyFive Technologies",
         "role": "Flutter Developer",
         "duration": "April 2023 - Present",
-        "location": "Jaipur, Rajasthan, India",
+        "location": "Remote",
         "description": [
-          "Spearheaded the development of a dynamic customer dashboard, enhancing user engagement by 30%.",
-          "Collaborated with cross-functional teams to implement responsive design principles, ensuring seamless user experiences across various devices.",
-          "Introduced and implemented API integration and best practices in code reviews, resulting in a 20% improvement in code quality and faster development cycles.",
-          "Utilized advanced Dart concepts to create modular and reusable UI components, streamlining the development process and reducing time-to-market.",
-          "Actively participated in Agile ceremonies, fostering a collaborative and efficient development environment.",
-          "Analyzed user feedback to drive continuous improvement and user satisfaction."
+          "Architected and shipped 8+ production Flutter apps for international clients across sports-tech, fintech, smart-city, healthcare, and e-commerce — full lifecycle from design to Play Store / App Store release.",
+          "Designed and delivered Arena (client) — live cricket analytics with real-time Opta SSE streaming, custom-painted charts (wagon wheel, worm, manhattan), per-player stats, 6-package monorepo & multi-flavor builds.",
+          "Implemented Lend Mate — fintech P2P loan app with EMI scheduling, Supabase backend, payment proof & lender approval workflow, extra-payment recalculation, and GitHub Actions CI/CD (auto APK build to Google Drive on push to main).",
+          "Engineered Dio interceptor chains (JWT auto-refresh on 401, force-logout on expiry), established Clean Architecture with local package separation & multi-flavor configs; led code reviews driving 20% quality improvement and faster sprint cycles.",
+          "Leveraged Claude & GitHub Copilot/Codex for scaffolding, architecture reviews & debugging, measurably shortening iteration cycles.",
+          "Collaborated with designers, backend engineers & QA in Agile sprints to deliver pixel-perfect UIs across Android, iOS & Flutter Web — spearheaded a flagship dashboard rebuild that boosted user engagement by 30%."
         ]
-      },
+      }
+    ]
+  },
+  "education": {
+    "sectionTitle": "Education",
+    "degrees": [
       {
-        "company": "Chakraborty and Lahkar Innovations Pvt. Ltd.",
-        "role": "Android Developer Intern",
-        "duration": "March 2023 - May 2023",
-        "location": "India",
-        "description": [
-          "Played a critical role in implementing application designs and collaborating on cross-platform features to support product launches."
-        ]
+        "institution": "B K Birla Institute of Engineering & Technology, Pilani",
+        "degree": "B.Tech in Computer Science & Engineering",
+        "duration": "2019 – 2023",
+        "cgpa": "8.72"
       }
     ]
   },
   "projects": {
     "sectionTitle": "Recent Work",
     "clientProjectsTitle": "Client Projects",
+    "clientProjects": [
+      {
+        "id": "arena",
+        "title": "Arena",
+        "description": "A real-time cricket analytics platform built for a client, featuring live ball-by-ball match streaming via SSE, advanced interactive charts (wagon wheel, worm, manhattan, ball-by-ball), detailed scorecards, and player analytics — all in a polished dark-first UI.",
+        "fullDescription": "Arena is a professional cricket analytics mobile app built for a sports-tech client. It streams live match data using Server-Sent Events from the Opta feed, handling both provisional delivery events (timeline_update) and authoritative score confirmations (scorecard_update). The app features custom-painted cricket visualizations, per-player batting and bowling analytics, playing XI lineups, and a multi-tab dashboard — delivering a comprehensive match experience for cricket fans.",
+        "userHighlights": [
+          "Follow live cricket matches ball-by-ball with instant delivery animations, pitch maps, and provisional scoring that updates to authoritative Opta data within seconds.",
+          "Explore interactive charts — wagon wheel, worm chart, manhattan chart, and ball-by-ball runs — to understand batting patterns and match momentum at a glance.",
+          "View detailed scorecards with batting figures, bowling stats, fall of wickets, shot types, and fielding positions for every player.",
+          "Browse the full playing XI lineup with player cards and career stats before and during a match.",
+          "Switch between English and Spanish, and toggle light/dark mode from the profile settings.",
+          "Navigate a clean 5-tab dashboard covering live match center, schedule, search, and profile."
+        ],
+        "developerHighlights": [
+          "Implemented dual SSE event processing (timeline_update for immediate animations, scorecard_update for authoritative scores) with a lifecycle-aware connection manager that pauses on background and resumes on foreground.",
+          "Built a custom-painter chart system with an extensible base architecture powering wagon wheel, worm, manhattan, and ball-by-ball visualizations without third-party charting libraries.",
+          "Structured as a monorepo with six local packages (routing, flavor, locale, local_storage, common_components, network) to enforce separation of concerns and enable independent testing.",
+          "Applied Riverpod + StateNotifier state management with plain Dart copyWith() state classes — no code generation — for fast iteration and readable state transitions.",
+          "Integrated a Dio interceptor chain with automatic token refresh on 401, graceful force-logout on refresh failure, and functional Either<Exception, T> error handling throughout the data layer.",
+          "Configured multi-flavor builds (staging/production) with separate entry points, environment configs, and a draggable Talker debug overlay available only in staging."
+        ],
+        "features": [
+          "Real-time live match streaming via Server-Sent Events (flutter_client_sse) with ball-by-ball delivery events from Opta.",
+          "Pitch map visualization with delivery coordinates, shot type, connection quality, foot movement, and field position.",
+          "Wagon wheel shot distribution chart and worm/manhattan/ball-by-ball run charts rendered with custom Flutter painters.",
+          "Detailed scorecard: per-player batting and bowling figures, fall of wickets, dismissal info, and extras breakdown.",
+          "Playing XI lineup display with player stats cards and team player selection interface.",
+          "Mini scorecard carousel and match schedule browser with venue details.",
+          "User profile with editable details, theme switching (light/dark), and bilingual support (EN/ES).",
+          "Authentication with OTP verification, JWT token refresh interceptor, and auto-logout on session expiry.",
+          "5-tab bottom navigation dashboard (Match Center as default landing tab) with IndexedStack for tab state persistence.",
+          "Multi-flavor build configuration (staging/production) with environment-specific base URLs and debug tooling."
+        ],
+        "techStack": [
+          "Flutter",
+          "Dart",
+          "Riverpod",
+          "Flutter Hooks",
+          "GoRouter",
+          "Server-Sent Events (SSE)",
+          "Dio",
+          "dartz (Either)",
+          "Lottie",
+          "SharedPreferences",
+          "Custom Painters",
+          "Monorepo (local packages)"
+        ],
+        "imageUrl": "assets/images/arena/arena_app.png",
+        "screenshots": [
+          "assets/images/arena/a1.png",
+          "assets/images/arena/a2.png",
+          "assets/images/arena/a3.png",
+          "assets/images/arena/board.png",
+          "assets/images/arena/player.png"
+        ]
+      },
+      {
+        "id": "subscribe-me",
+        "title": "Subscribe Me",
+        "description": "A car rental app with Firebase backend, deep-link navigation, and geolocation features for a seamless vehicle booking experience.",
+        "fullDescription": "Subscribe Me is a client-built car rental application featuring Firebase-backed authentication and data management, deep-link support for contextual navigation, and geolocation services to help users find and book nearby vehicles.",
+        "userHighlights": [
+          "Browse and book rental cars with real-time availability.",
+          "Use geolocation to find vehicles near your current location.",
+          "Navigate directly to specific listings via deep links."
+        ],
+        "developerHighlights": [
+          "Integrated Firebase Auth, Firestore, and FCM for authentication, data, and push notifications.",
+          "Implemented deep-link handling for contextual in-app navigation from external sources.",
+          "Integrated geolocation services for proximity-based vehicle discovery."
+        ],
+        "features": [
+          "Firebase authentication and real-time Firestore data sync.",
+          "Deep-link support for direct navigation to specific content.",
+          "Geolocation-based vehicle discovery and booking flow.",
+          "Push notifications via Firebase Cloud Messaging."
+        ],
+        "techStack": [
+          "Flutter",
+          "Dart",
+          "Firebase Auth",
+          "Firestore",
+          "FCM",
+          "Deep Links",
+          "Geolocation"
+        ],
+        "imageUrl": "assets/images/subscribe_me/home.png",
+        "androidDownloadLink": "https://play.google.com/store/apps/details?id=com.awrostamani.subscribeme&pcampaignid=web_share",
+        "iosDownloadLink": ""
+
+      }
+    ],
     "personalProjectsTitle": "Personal Projects",
     "personalProjects": [
       {
         "id": "lend-mate",
         "title": "Lend Mate",
-        "description": "A comprehensive loan management application built to help users manage debts and view schedules. Features complex local state management, dynamic PDF report generation, and extra payment tracking.",
-        "fullDescription": "LendMate is a peer-to-peer loan tracking app built to help individuals manage personal loans with transparency between borrower and lender. The app supports loan creation, EMI scheduling, proof-based payment approvals, extra payments, reminders, and complete payment history so both parties can always see the latest loan status.",
+        "description": "A fintech P2P loan management app with EMI scheduling, Supabase backend, payment proof & lender approval workflow, extra-payment recalculation, and GitHub Actions CI/CD that auto-builds an APK to Google Drive on every push to main.",
+        "fullDescription": "LendMate is a peer-to-peer loan tracking app built to help individuals manage personal loans with transparency between borrower and lender. The app supports loan creation, EMI scheduling, proof-based payment approvals, extra payments, reminders, and complete payment history so both parties can always see the latest loan status. A GitHub Actions pipeline automatically builds and uploads the APK to Google Drive on every push to main.",
         "userHighlights": [
           "Create and manage personal loans with amount, interest rate, tenure, EMI date, and start date.",
           "View separate dashboards for loans you borrowed and loans you lent.",
@@ -74,8 +173,8 @@
           "Structured around a layered Flutter architecture with models, repositories, BLoC/Cubit state management, and feature-based UI modules.",
           "Uses Supabase for backend services, Supabase Auth for authentication, and Supabase Storage for payment proof uploads.",
           "Implements EMI calculations, dynamic repayment updates, and extra payment recalculation logic for reducing tenure or interest impact.",
-          "Supports real-time sync for loan and payment status so both parties stay updated without manual refresh cycles.",
-          "Designed for extensibility with future support for PDF reports, group loans, AI reminders, UPI integration, and late-fee logic."
+          "GitHub Actions CI/CD pipeline automatically builds the APK and uploads it to Google Drive on every push to main.",
+          "Supports real-time sync for loan and payment status so both parties stay updated without manual refresh cycles."
         ],
         "features": [
           "Loan creation with principal, annual interest, tenure, EMI date, start date, borrower selection, and optional UPI IDs.",
@@ -85,7 +184,8 @@
           "EMI tracking with pending, paid, and approved states plus next due date visibility.",
           "Complete payment history with proof records and filtering by time period.",
           "Reminder and notification flow for due EMIs, approvals, and extra payments.",
-          "Dashboard summary for borrowed amount, lent amount, upcoming payments, and overall repayment visibility."
+          "Dashboard summary for borrowed amount, lent amount, upcoming payments, and overall repayment visibility.",
+          "GitHub Actions CI/CD: automatic APK build and Google Drive upload on push to main."
         ],
         "screenshots": [
           "assets/images/lendmate/dashboard-portrait.png",
@@ -102,12 +202,75 @@
           "Supabase",
           "Supabase Auth",
           "Supabase Storage",
-          "Local Notifications"
+          "Local Notifications",
+          "GitHub Actions"
         ],
         "githubLink": "https://github.com/kumaranuket123/lend_mate",
         "androidDownloadLink": "https://drive.google.com/file/d/17GUaFjxBkvWt2KFHIW0zhkGKxfovxQ8k/view?usp=drive_link",
         "iosDownloadLink": "",
         "imageUrl": "assets/images/lendmate/dashboard-portrait.png"
+      },
+      {
+        "id": "portfolio-website",
+        "title": "Portfolio Website",
+        "description": "Personal Flutter Web portfolio showcasing projects & skills, deployed at anuket.co.in.",
+        "fullDescription": "A personal portfolio website built entirely with Flutter Web, showcasing my projects, skills, and experience. Features a custom terminal-aesthetic UI with smooth animations and responsive layout across desktop and mobile. Deployed at anuket.co.in.",
+        "userHighlights": [
+          "Browse a curated showcase of client and personal projects with detailed case studies.",
+          "Explore skills, experience, and background in an interactive terminal-style UI.",
+          "Fully responsive design across desktop, tablet, and mobile."
+        ],
+        "developerHighlights": [
+          "Built entirely with Flutter Web for a consistent cross-platform web experience.",
+          "Custom terminal-aesthetic UI with animations and responsive layout.",
+          "Deployed and hosted at anuket.co.in."
+        ],
+        "features": [
+          "Project showcase with detailed descriptions, tech stacks, and links.",
+          "Interactive terminal-style UI with custom animations.",
+          "Fully responsive layout for all screen sizes.",
+          "Live at anuket.co.in."
+        ],
+        "techStack": [
+          "Flutter",
+          "Dart",
+          "Flutter Web",
+          "Custom Animations",
+          "Responsive UI"
+        ],
+        "githubLink": "https://github.com/kumaranuket123",
+        "liveLink": "https://anuket.co.in",
+        "imageUrl": ""
+      },
+      {
+        "id": "maps-navigation",
+        "title": "Maps Navigation",
+        "description": "A real-time GPS tracking & route optimisation app built to explore Flutter's geolocation and mapping capabilities.",
+        "fullDescription": "Maps Navigation is a personal project exploring real-time GPS tracking and route optimisation in Flutter. It demonstrates integration with mapping APIs, live location updates, and efficient route calculation.",
+        "userHighlights": [
+          "Track your real-time GPS location on an interactive map.",
+          "Calculate and display optimised routes between two points.",
+          "Smooth map interactions with live location updates."
+        ],
+        "developerHighlights": [
+          "Integrated real-time GPS location tracking with continuous updates.",
+          "Implemented route optimisation logic with mapping API integration.",
+          "Explored Flutter's geolocation and mapping ecosystem."
+        ],
+        "features": [
+          "Real-time GPS tracking with live map updates.",
+          "Route optimisation between origin and destination.",
+          "Interactive map UI with location markers and path rendering."
+        ],
+        "techStack": [
+          "Flutter",
+          "Dart",
+          "Geolocation",
+          "Maps API",
+          "GPS Tracking"
+        ],
+        "githubLink": "https://github.com/kumaranuket123",
+        "imageUrl": ""
       }
     ]
   },

@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/portfolio_data.dart';
 import '../theme/app_colors.dart';
 import '../widgets/image_viewer.dart';
+import '../widgets/project_media.dart';
 
 class ProjectDetailScreen extends StatefulWidget {
   final String projectId;
@@ -112,15 +113,13 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Hero Image
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: _ProjectImage(
-                          path: item.imageUrl,
-                          width: double.infinity,
-                          height: isMobile ? 350 : 500,
-                          fit: BoxFit.fitHeight,
-                        ),
+                      // Hero Image or Video
+                      ProjectMediaHero(
+                        url: item.imageUrl,
+                        width: double.infinity,
+                        height: isMobile ? 350 : 500,
+                        fit: BoxFit.fitHeight,
+                        borderRadius: 16,
                       ),
                       const SizedBox(height: 40),
 
@@ -358,7 +357,7 @@ class _ProjectImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
-        errorBuilder: (_, __, ___) => _errorWidget(width, height),
+        errorBuilder: (_, _, _) => _errorWidget(width, height),
       );
     }
     return Image.asset(
@@ -366,7 +365,7 @@ class _ProjectImage extends StatelessWidget {
       width: width,
       height: height,
       fit: fit,
-      errorBuilder: (_, __, ___) => _errorWidget(width, height),
+      errorBuilder: (_, _, _) => _errorWidget(width, height),
     );
   }
 }

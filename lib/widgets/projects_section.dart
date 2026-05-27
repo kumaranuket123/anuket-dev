@@ -146,6 +146,7 @@ class _ProjectFeaturedState extends State<_ProjectFeatured> {
   bool isHovered = false;
 
   bool get _hasProjectDetail => widget.item.id.trim().isNotEmpty;
+  bool get _hasImage => widget.item.imageUrl.trim().isNotEmpty;
   bool get _usesAssetImage => !widget.item.imageUrl.startsWith('http');
   bool get _hasAndroidDownloadLink =>
       widget.item.androidDownloadLink.trim().isNotEmpty;
@@ -158,27 +159,38 @@ class _ProjectFeaturedState extends State<_ProjectFeatured> {
     await launchUrl(uri, webOnlyWindowName: '_blank');
   }
 
+  Widget _buildImagePlaceholder() {
+    return Container(
+      color: AppColors.background,
+      alignment: Alignment.center,
+      child: Text(
+        widget.item.title,
+        textAlign: TextAlign.center,
+        style: GoogleFonts.outfit(
+          color: AppColors.primary,
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 0.5,
+        ),
+      ),
+    );
+  }
+
   Widget _buildImageWidget() {
+    if (!_hasImage) return _buildImagePlaceholder();
+
     if (_usesAssetImage) {
       return Image.asset(
-          widget.item.imageUrl,
-          fit: BoxFit.fitHeight,
+        widget.item.imageUrl,
+        fit: BoxFit.fitHeight,
+        errorBuilder: (context, error, stackTrace) => _buildImagePlaceholder(),
       );
     }
 
     return Image.network(
       widget.item.imageUrl,
       fit: BoxFit.contain,
-      errorBuilder: (context, error, stackTrace) {
-        return Container(
-          color: AppColors.surface,
-          alignment: Alignment.center,
-          child: const Text(
-            'Image Unavailable',
-            style: TextStyle(color: AppColors.textSecondary),
-          ),
-        );
-      },
+      errorBuilder: (context, error, stackTrace) => _buildImagePlaceholder(),
     );
   }
 
