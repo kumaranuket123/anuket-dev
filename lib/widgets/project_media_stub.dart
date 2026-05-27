@@ -21,6 +21,7 @@ class ProjectMediaHero extends StatelessWidget {
   static bool isVideoUrl(String url) {
     final lower = url.toLowerCase();
     return lower.contains('youtube.com/watch') ||
+        lower.contains('youtube.com/shorts') ||
         lower.contains('youtu.be/') ||
         lower.contains('vimeo.com') ||
         lower.endsWith('.mp4') ||

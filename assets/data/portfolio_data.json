@@ -109,7 +109,9 @@
           "Custom Painters",
           "Monorepo (local packages)"
         ],
-        "imageUrl": "assets/images/arena/arena_app.png",
+        "imageUrl": "https://youtube.com/shorts/mxmH6qmHMZQ?feature=share",
+        "androidDownloadLink": "https://drive.google.com/file/d/1HfOVLuyR63BY86QSVKjR6dI_EzGK68Ec/view?usp=drive_link",
+        "iosDownloadLink": "",
         "screenshots": [
           "assets/images/arena/a1.png",
           "assets/images/arena/a2.png",

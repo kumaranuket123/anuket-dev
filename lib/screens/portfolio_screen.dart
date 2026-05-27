@@ -10,6 +10,7 @@ import '../widgets/hero_section.dart';
 import '../widgets/about_section.dart';
 import '../widgets/projects_section.dart';
 import '../widgets/contact_section.dart';
+import '../widgets/iab_banner.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -123,7 +124,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               ),
             )
           : null,
-      body: Stack(
+      body: Column(
+        children: [
+          const IabBanner(),
+          Expanded(child: Stack(
         children: [
           const Positioned.fill(
             child: _GridBackground(),
@@ -169,6 +173,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               );
             },
           ),
+        ],
+      )),
         ],
       ),
     );
