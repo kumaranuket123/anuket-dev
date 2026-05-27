@@ -103,20 +103,41 @@
   </div>
 
   <script>
-    // Fix Instagram IAB and other in-app browser 100vh mis-reporting.
-    // Their UI chrome is not subtracted, so window.innerHeight gives the
-    // true usable height. We apply it as a CSS custom property instead of
-    // setting body height directly — Flutter reads the canvas size from the
-    // layout, not from body.style.height.
     (function () {
-      function setVh() {
-        document.documentElement.style.setProperty('--vh', window.innerHeight + 'px');
-      }
-      setVh();
-      window.addEventListener('resize', setVh);
-    }());
+      var ua = navigator.userAgent || '';
+      var isIAB = /Instagram|FBAN|FBAV|Twitter\/|LinkedInApp|Snapchat|TikTok/i.test(ua);
+      if (!isIAB) return;
 
-</script>
+      var isIOS = /iPhone|iPad|iPod/i.test(ua);
+      var instruction = isIOS
+        ? 'Tap <strong style="color:#e2e8f0">···</strong> at the bottom-right &rarr; <strong style="color:#e2e8f0">Open in Safari</strong>'
+        : 'Tap <strong style="color:#e2e8f0">⋮</strong> at the top-right &rarr; <strong style="color:#e2e8f0">Open in Chrome</strong>';
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var o = document.createElement('div');
+        o.id = 'iab-wall';
+        o.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#0B0F19;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;box-sizing:border-box;font-family:system-ui,sans-serif;text-align:center';
+        o.innerHTML =
+          '<div style="max-width:320px;width:100%">' +
+            '<div style="font-family:monospace;color:#00F2FE;font-size:20px;font-weight:700;margin-bottom:20px">&gt;_ anuket</div>' +
+            '<p style="color:#e2e8f0;font-size:15px;line-height:1.65;margin:0 0 10px">This page works best in your device browser.</p>' +
+            '<p style="color:#64748b;font-size:14px;line-height:1.65;margin:0 0 28px">' + instruction + '</p>' +
+            '<button id="iab-copy" style="background:transparent;border:1.5px solid #00F2FE;color:#00F2FE;padding:13px 0;border-radius:6px;font-family:monospace;font-size:13px;cursor:pointer;width:100%;margin-bottom:10px;letter-spacing:.5px">Copy Link</button>' +
+            '<button onclick="document.getElementById(\'iab-wall\').remove()" style="background:transparent;border:1.5px solid #1e293b;color:#475569;padding:13px 0;border-radius:6px;font-family:monospace;font-size:13px;cursor:pointer;width:100%;letter-spacing:.5px">Continue Anyway</button>' +
+          '</div>';
+        document.body.appendChild(o);
+        document.getElementById('iab-copy').addEventListener('click', function () {
+          var btn = this;
+          navigator.clipboard.writeText(window.location.href).then(function () {
+            btn.textContent = 'Copied!';
+            setTimeout(function () { btn.textContent = 'Copy Link'; }, 2000);
+          }).catch(function () {
+            btn.textContent = 'Copy failed';
+          });
+        });
+      });
+    }());
+  </script>
 
   <script src="flutter_bootstrap.js" async></script>
 
