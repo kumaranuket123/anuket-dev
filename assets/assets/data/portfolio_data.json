@@ -109,15 +109,16 @@
           "Custom Painters",
           "Monorepo (local packages)"
         ],
-        "imageUrl": "https://youtube.com/shorts/mxmH6qmHMZQ?feature=share",
+        "imageUrl": "https://youtube.com/shorts/nzObEDmPq-o",
         "androidDownloadLink": "https://drive.google.com/file/d/1HfOVLuyR63BY86QSVKjR6dI_EzGK68Ec/view?usp=drive_link",
         "iosDownloadLink": "",
         "screenshots": [
+          "assets/images/arena/arena_app.png",
           "assets/images/arena/a1.png",
           "assets/images/arena/a2.png",
           "assets/images/arena/a3.png",
-          "assets/images/arena/board.png",
-          "assets/images/arena/player.png"
+          "assets/images/arena/a4.png",
+          "assets/images/arena/a5.png"
         ]
       },
       {
@@ -213,38 +214,6 @@
         "imageUrl": "assets/images/lendmate/dashboard-portrait.png"
       },
       {
-        "id": "portfolio-website",
-        "title": "Portfolio Website",
-        "description": "Personal Flutter Web portfolio showcasing projects & skills, deployed at anuket.co.in.",
-        "fullDescription": "A personal portfolio website built entirely with Flutter Web, showcasing my projects, skills, and experience. Features a custom terminal-aesthetic UI with smooth animations and responsive layout across desktop and mobile. Deployed at anuket.co.in.",
-        "userHighlights": [
-          "Browse a curated showcase of client and personal projects with detailed case studies.",
-          "Explore skills, experience, and background in an interactive terminal-style UI.",
-          "Fully responsive design across desktop, tablet, and mobile."
-        ],
-        "developerHighlights": [
-          "Built entirely with Flutter Web for a consistent cross-platform web experience.",
-          "Custom terminal-aesthetic UI with animations and responsive layout.",
-          "Deployed and hosted at anuket.co.in."
-        ],
-        "features": [
-          "Project showcase with detailed descriptions, tech stacks, and links.",
-          "Interactive terminal-style UI with custom animations.",
-          "Fully responsive layout for all screen sizes.",
-          "Live at anuket.co.in."
-        ],
-        "techStack": [
-          "Flutter",
-          "Dart",
-          "Flutter Web",
-          "Custom Animations",
-          "Responsive UI"
-        ],
-        "githubLink": "https://github.com/kumaranuket123",
-        "liveLink": "https://anuket.co.in",
-        "imageUrl": ""
-      },
-      {
         "id": "maps-navigation",
         "title": "Maps Navigation",
         "description": "A real-time GPS tracking & route optimisation app built to explore Flutter's geolocation and mapping capabilities.",
@@ -272,6 +241,7 @@
           "GPS Tracking"
         ],
         "githubLink": "https://github.com/kumaranuket123",
+        "liveLink": "https://www.linkedin.com/posts/anuket-kumar_55tech-fiftyfivetech-flutter-activity-7094037522372030464-slfK?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC0NXWcBLl2AqhN5SRfxWGw2jpx39jusv9I",
         "imageUrl": ""
       }
     ]
