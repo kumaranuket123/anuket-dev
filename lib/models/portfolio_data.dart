@@ -2,12 +2,14 @@ class PortfolioData {
   final HeroData hero;
   final AboutData about;
   final ProjectsData projects;
+  final List<CertificateItem> certificates;
   final ContactData contact;
 
   PortfolioData({
     required this.hero,
     required this.about,
     required this.projects,
+    required this.certificates,
     required this.contact,
   });
 
@@ -16,6 +18,9 @@ class PortfolioData {
       hero: HeroData.fromJson(json['hero']),
       about: AboutData.fromJson(json['about']),
       projects: ProjectsData.fromJson(json['projects']),
+      certificates: (json['certificates'] as List? ?? [])
+          .map((e) => CertificateItem.fromJson(e))
+          .toList(),
       contact: ContactData.fromJson(json['contact']),
     );
   }
@@ -164,6 +169,32 @@ class ProjectItem {
       androidDownloadLink:
           json['androidDownloadLink'] ?? json['downloadLink'] ?? '',
       iosDownloadLink: json['iosDownloadLink'] ?? '',
+      imageUrl: json['imageUrl'] ?? '',
+    );
+  }
+}
+
+class CertificateItem {
+  final String title;
+  final String issuer;
+  final String date;
+  final String description;
+  final String imageUrl;
+
+  CertificateItem({
+    required this.title,
+    required this.issuer,
+    required this.date,
+    required this.description,
+    required this.imageUrl,
+  });
+
+  factory CertificateItem.fromJson(Map<String, dynamic> json) {
+    return CertificateItem(
+      title: json['title'] ?? '',
+      issuer: json['issuer'] ?? '',
+      date: json['date'] ?? '',
+      description: json['description'] ?? '',
       imageUrl: json['imageUrl'] ?? '',
     );
   }
