@@ -44,4 +44,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Environment / secrets — never commit these
+.env
+**/.env
+*.env
+portfolio_backend/.env
+
 

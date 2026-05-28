@@ -11,6 +11,7 @@ import '../widgets/about_section.dart';
 import '../widgets/projects_section.dart';
 import '../widgets/contact_section.dart';
 import '../widgets/certificates_section.dart';
+import '../widgets/skills_section.dart';
 import '../widgets/iab_banner.dart';
 
 class PortfolioScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
   final GlobalKey _homeKey = GlobalKey();
   final GlobalKey _aboutKey = GlobalKey();
+  final GlobalKey _skillsKey = GlobalKey();
   final GlobalKey _projectsKey = GlobalKey();
   final GlobalKey _certificatesKey = GlobalKey();
   final GlobalKey _contactKey = GlobalKey();
@@ -83,9 +85,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
             : [
                 _NavBarItem(index: 0, title: 'Home', onTap: () => _scrollToSection(_homeKey)),
                 _NavBarItem(index: 1, title: 'About', onTap: () => _scrollToSection(_aboutKey)),
-                _NavBarItem(index: 2, title: 'Work', onTap: () => _scrollToSection(_projectsKey)),
-                _NavBarItem(index: 3, title: 'Awards', onTap: () => _scrollToSection(_certificatesKey)),
-                _NavBarItem(index: 4, title: 'Contact', onTap: () => _scrollToSection(_contactKey)),
+                _NavBarItem(index: 2, title: 'Skills', onTap: () => _scrollToSection(_skillsKey)),
+                _NavBarItem(index: 3, title: 'Work', onTap: () => _scrollToSection(_projectsKey)),
+                _NavBarItem(index: 4, title: 'Awards', onTap: () => _scrollToSection(_certificatesKey)),
+                _NavBarItem(index: 5, title: 'Contact', onTap: () => _scrollToSection(_contactKey)),
                 const SizedBox(width: 20),
                 _ResumeButton(url: _resumeLink ?? ''),
                 const SizedBox(width: 20),
@@ -109,15 +112,19 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                           Navigator.pop(context);
                           _scrollToSection(_aboutKey);
                         }),
-                        _DrawerItem(index: 2, title: 'Work', onTap: () {
+                        _DrawerItem(index: 2, title: 'Skills', onTap: () {
+                          Navigator.pop(context);
+                          _scrollToSection(_skillsKey);
+                        }),
+                        _DrawerItem(index: 3, title: 'Work', onTap: () {
                           Navigator.pop(context);
                           _scrollToSection(_projectsKey);
                         }),
-                        _DrawerItem(index: 3, title: 'Awards', onTap: () {
+                        _DrawerItem(index: 4, title: 'Awards', onTap: () {
                           Navigator.pop(context);
                           _scrollToSection(_certificatesKey);
                         }),
-                        _DrawerItem(index: 4, title: 'Contact', onTap: () {
+                        _DrawerItem(index: 5, title: 'Contact', onTap: () {
                           Navigator.pop(context);
                           _scrollToSection(_contactKey);
                         }),
@@ -171,6 +178,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                           onWorkTap: () => _scrollToSection(_projectsKey),
                         ),
                         AboutSection(key: _aboutKey, data: data.about),
+                        SkillsSection(key: _skillsKey, data: data.skills),
                         ProjectsSection(key: _projectsKey, data: data.projects),
                         CertificatesSection(key: _certificatesKey, certificates: data.certificates),
                         ContactSection(key: _contactKey, data: data.contact),
@@ -420,7 +428,7 @@ class _DrawerFooter extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       child: Text(
-        '~  [5 sections loaded]',
+        '~  [6 sections loaded]',
         style: GoogleFonts.firaCode(
           color: AppColors.textSecondary.withValues(alpha: 0.5),
           fontSize: 11,

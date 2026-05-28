@@ -146,7 +146,7 @@ class HeroSection extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Based in Jaipur, India',
+                  'Based in India',
                   style: GoogleFonts.inter(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,

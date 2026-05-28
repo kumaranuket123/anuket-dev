@@ -1,6 +1,7 @@
 class PortfolioData {
   final HeroData hero;
   final AboutData about;
+  final SkillsData skills;
   final ProjectsData projects;
   final List<CertificateItem> certificates;
   final ContactData contact;
@@ -8,6 +9,7 @@ class PortfolioData {
   PortfolioData({
     required this.hero,
     required this.about,
+    required this.skills,
     required this.projects,
     required this.certificates,
     required this.contact,
@@ -17,6 +19,7 @@ class PortfolioData {
     return PortfolioData(
       hero: HeroData.fromJson(json['hero']),
       about: AboutData.fromJson(json['about']),
+      skills: SkillsData.fromJson(json['skills'] ?? {}),
       projects: ProjectsData.fromJson(json['projects']),
       certificates: (json['certificates'] as List? ?? [])
           .map((e) => CertificateItem.fromJson(e))
@@ -54,6 +57,67 @@ class HeroData {
       buttonText: json['buttonText'] ?? '',
       resumeLink: json['resumeLink'] ?? '',
       imagePath: json['imagePath'] ?? '',
+    );
+  }
+}
+
+class SkillsData {
+  final String sectionTitle;
+  final String subtitle;
+  final List<SkillCategory> categories;
+
+  SkillsData({
+    required this.sectionTitle,
+    required this.subtitle,
+    required this.categories,
+  });
+
+  factory SkillsData.fromJson(Map<String, dynamic> json) {
+    return SkillsData(
+      sectionTitle: json['sectionTitle'] ?? '',
+      subtitle: json['subtitle'] ?? '',
+      categories: (json['categories'] as List? ?? [])
+          .map((e) => SkillCategory.fromJson(e))
+          .toList(),
+    );
+  }
+}
+
+class SkillCategory {
+  final String name;
+  final String icon;
+  final List<SkillItem> items;
+
+  SkillCategory({
+    required this.name,
+    required this.icon,
+    required this.items,
+  });
+
+  factory SkillCategory.fromJson(Map<String, dynamic> json) {
+    return SkillCategory(
+      name: json['name'] ?? '',
+      icon: json['icon'] ?? 'code',
+      items: (json['items'] as List? ?? [])
+          .map((e) => SkillItem.fromJson(e))
+          .toList(),
+    );
+  }
+}
+
+class SkillItem {
+  final String name;
+  final int level;
+
+  SkillItem({
+    required this.name,
+    required this.level,
+  });
+
+  factory SkillItem.fromJson(Map<String, dynamic> json) {
+    return SkillItem(
+      name: json['name'] ?? '',
+      level: json['level'] ?? 0,
     );
   }
 }
