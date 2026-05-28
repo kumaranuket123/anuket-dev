@@ -28,6 +28,85 @@
     ],
     "profileIcon": "assets/images/my_pic.png"
   },
+  "skills": {
+    "sectionTitle": "Skills & Technologies",
+    "subtitle": "Tools and technologies I use to bring products to life.",
+    "categories": [
+      {
+        "name": "Languages & Core",
+        "icon": "code",
+        "items": [
+          { "name": "Flutter", "level": 95 },
+          { "name": "Dart", "level": 95 },
+          { "name": "C++", "level": 70 },
+          { "name": "C", "level": 60 }
+        ]
+      },
+      {
+        "name": "State Management",
+        "icon": "layers",
+        "items": [
+          { "name": "BLoC / Cubit", "level": 90 },
+          { "name": "Riverpod", "level": 85 },
+          { "name": "Flutter Hooks", "level": 75 },
+          { "name": "StateNotifier", "level": 80 }
+        ]
+      },
+      {
+        "name": "Architecture & Patterns",
+        "icon": "architecture",
+        "items": [
+          { "name": "Clean Architecture", "level": 90 },
+          { "name": "Monorepo / Local Packages", "level": 85 },
+          { "name": "Multi-Flavor Builds", "level": 80 },
+          { "name": "Agile / Scrum", "level": 85 }
+        ]
+      },
+      {
+        "name": "Backend & Database",
+        "icon": "storage",
+        "items": [
+          { "name": "Firebase", "level": 85 },
+          { "name": "Supabase", "level": 80 },
+          { "name": "Firestore", "level": 80 },
+          { "name": "SharedPreferences", "level": 85 },
+          { "name": "Hive", "level": 85 }
+        ]
+      },
+      {
+        "name": "Networking & APIs integration",
+        "icon": "wifi",
+        "items": [
+          { "name": "REST APIs", "level": 90 },
+          { "name": "SSE (Real-time)", "level": 85 },
+          { "name": "Dio / Interceptors", "level": 90 },
+          { "name": "JWT Auth", "level": 85 },
+          { "name": "dartz (Either)", "level": 80 }
+        ]
+      },
+      {
+        "name": "UI & Visualization",
+        "icon": "palette",
+        "items": [
+          { "name": "Custom Painters", "level": 85 },
+          { "name": "Animations / Lottie", "level": 80 },
+          { "name": "GoRouter", "level": 90 },
+          { "name": "Responsive Design", "level": 85 }
+        ]
+      },
+      {
+        "name": "DevOps & Tooling",
+        "icon": "build",
+        "items": [
+          { "name": "GitHub Actions CI/CD", "level": 85 },
+          { "name": "FCM / Push Notifications", "level": 80 },
+          { "name": "Unit / Widget Testing", "level": 75 },
+          { "name": "Geolocation / Maps", "level": 75 },
+          { "name": "Deep Links", "level": 75 }
+        ]
+      }
+    ]
+  },
   "experience": {
     "sectionTitle": "Experience",
     "jobs": [
@@ -279,7 +358,7 @@
   "contact": {
     "heading": "Ready to Start?",
     "title": "Let's Work Together",
-    "description": "I'm currently taking on new clients and exciting freelance projects. If you have a business problem that needs a technical solution, or if you simply want to discuss an idea, my inbox is always open. Let's make it happen!",
+    "description": "If you have a business problem that needs a technical solution, or if you simply want to discuss an idea, my inbox is always open. Let's make it happen!",
     "buttonText": "Send an Email",
     "email": "chalesramanewton@gmail.com",
     "subject": "Inquiry: Let's build an app together",
