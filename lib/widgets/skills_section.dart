@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../models/portfolio_data.dart';
 import '../theme/app_colors.dart';
 import '../utils/responsive.dart';
+import 'horizontal_carousel.dart';
 
 class SkillsSection extends StatelessWidget {
   final SkillsData data;
@@ -59,42 +60,18 @@ class SkillsSection extends StatelessWidget {
           const SizedBox(height: 40),
           Container(height: 1, color: AppColors.surface),
           const SizedBox(height: 40),
-          _SkillsGrid(categories: data.categories, isMobile: isMobile),
+          HorizontalCarousel(
+            itemCount: data.categories.length,
+            cardWidth: 360,
+            mobileCardWidth: 300,
+            cardHeight: 360,
+            itemBuilder: (context, index) => _CategoryCard(
+              category: data.categories[index],
+              index: index,
+            ),
+          ),
         ],
       ),
-    );
-  }
-}
-
-class _SkillsGrid extends StatelessWidget {
-  final List<SkillCategory> categories;
-  final bool isMobile;
-
-  const _SkillsGrid({required this.categories, required this.isMobile});
-
-  @override
-  Widget build(BuildContext context) {
-    const spacing = 20.0;
-    final columns = isMobile ? 1 : (Responsive.isTablet(context) ? 2 : 3);
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final cardWidth = (constraints.maxWidth - spacing * (columns - 1)) / columns;
-
-        return Wrap(
-          spacing: spacing,
-          runSpacing: spacing,
-          children: List.generate(categories.length, (index) {
-            return SizedBox(
-              width: cardWidth,
-              child: _CategoryCard(
-                category: categories[index],
-                index: index,
-              ),
-            );
-          }),
-        );
-      },
     );
   }
 }
@@ -233,9 +210,14 @@ class _CategoryCardState extends State<_CategoryCard>
                 ],
               ),
               const SizedBox(height: 20),
-              // Skill items with progress bars
-              ...widget.category.items
-                  .map((item) => _SkillBar(item: item, isHovered: _isHovered)),
+              // Skill items as floating blocks
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: widget.category.items
+                    .map((item) => _SkillChip(name: item.name, isHovered: _isHovered))
+                    .toList(),
+              ),
             ],
           ),
         ),
@@ -244,127 +226,67 @@ class _CategoryCardState extends State<_CategoryCard>
   }
 }
 
-class _SkillBar extends StatefulWidget {
-  final SkillItem item;
+class _SkillChip extends StatelessWidget {
+  final String name;
   final bool isHovered;
 
-  const _SkillBar({required this.item, required this.isHovered});
-
-  @override
-  State<_SkillBar> createState() => _SkillBarState();
-}
-
-class _SkillBarState extends State<_SkillBar>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _barController;
-  late Animation<double> _barAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _barController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    );
-    _barAnimation = Tween<double>(begin: 0.0, end: widget.item.level / 100.0)
-        .animate(CurvedAnimation(
-      parent: _barController,
-      curve: Curves.easeOutCubic,
-    ));
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (mounted) _barController.forward();
-    });
-  }
-
-  @override
-  void dispose() {
-    _barController.dispose();
-    super.dispose();
-  }
+  const _SkillChip({required this.name, required this.isHovered});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Text(
-                  widget.item.name,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.inter(
-                    color: widget.isHovered
-                        ? AppColors.textPrimary
-                        : AppColors.textSecondary,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+      decoration: BoxDecoration(
+        color: isHovered
+            ? AppColors.primary.withValues(alpha: 0.10)
+            : AppColors.background,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: isHovered
+              ? AppColors.primary.withValues(alpha: 0.55)
+              : AppColors.primary.withValues(alpha: 0.16),
+          width: 1.2,
+        ),
+        boxShadow: isHovered
+            ? [
+                BoxShadow(
+                  color: AppColors.primary.withValues(alpha: 0.14),
+                  blurRadius: 14,
+                  offset: const Offset(0, 5),
                 ),
-              ),
-              AnimatedBuilder(
-                animation: _barAnimation,
-                builder: (context, child) {
-                  return Text(
-                    '${(_barAnimation.value * 100).round()}%',
-                    style: GoogleFonts.firaCode(
-                      color: AppColors.primary.withValues(alpha: 0.7),
-                      fontSize: 11,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  );
-                },
-              ),
-            ],
+              ]
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.20),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: isHovered
+                  ? AppColors.secondary
+                  : AppColors.primary.withValues(alpha: 0.6),
+            ),
           ),
-          const SizedBox(height: 6),
-          SizedBox(
-            height: 5,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(999),
-              child: AnimatedBuilder(
-                animation: _barAnimation,
-                builder: (context, child) {
-                  return Stack(
-                    children: [
-                      // Background track
-                      Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.background,
-                          borderRadius: BorderRadius.circular(999),
-                        ),
-                      ),
-                      // Filled portion with gradient
-                      FractionallySizedBox(
-                        widthFactor: _barAnimation.value,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(999),
-                            gradient: LinearGradient(
-                              colors: [
-                                AppColors.primary,
-                                AppColors.secondary,
-                              ],
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.primary.withValues(alpha: 0.3),
-                                blurRadius: 6,
-                                offset: const Offset(0, 0),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+          const SizedBox(width: 8),
+          Text(
+            name,
+            style: GoogleFonts.firaCode(
+              color: isHovered
+                  ? AppColors.textPrimary
+                  : AppColors.textSecondary,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

@@ -12,7 +12,7 @@
 - Analyze: `flutter analyze`
 - Run one test file: `flutter test test/widget_test.dart`
 - Build web release: `flutter build web --release`
-- CI deploy sequence is `flutter clean` -> `flutter pub get` -> `flutter build web --release`.
+- CI deploy sequence is `flutter clean` -> `flutter pub get` -> `flutter build web --release --web-resources-cdn`. The `--web-resources-cdn` flag serves the Flutter engine/CanvasKit from Google's CDN instead of GitHub Pages, which measurably cuts first-load time; keep it.
 
 ## Routing And Data Gotchas
 - Web routing uses `usePathUrlStrategy()` in `lib/main.dart`, so refresh/deep-link behavior depends on static hosting fallback support.

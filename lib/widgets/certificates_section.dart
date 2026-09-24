@@ -1,75 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../models/portfolio_data.dart';
 import '../theme/app_colors.dart';
 import '../utils/responsive.dart';
+import 'horizontal_carousel.dart';
 import 'image_viewer.dart';
 
-class CertificatesSection extends StatefulWidget {
+class CertificatesSection extends StatelessWidget {
   final List<CertificateItem> certificates;
 
   const CertificatesSection({super.key, required this.certificates});
 
   @override
-  State<CertificatesSection> createState() => _CertificatesSectionState();
-}
-
-class _CertificatesSectionState extends State<CertificatesSection> {
-  late final ScrollController _scrollController;
-  int _activeIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-    _scrollController.addListener(_onScroll);
-  }
-
-  @override
-  void dispose() {
-    _scrollController.removeListener(_onScroll);
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  void _onScroll() {
-    if (!_scrollController.hasClients) return;
-    final isMobile = MediaQuery.sizeOf(context).width < 768;
-    final cardWidth = (isMobile ? 260.0 : 320.0) + 20.0; // card + separator
-    final index = (_scrollController.offset / cardWidth).round()
-        .clamp(0, widget.certificates.length - 1);
-    if (index != _activeIndex) setState(() => _activeIndex = index);
-  }
-
-  void _scrollTo(int index) {
-    final isMobile = MediaQuery.sizeOf(context).width < 768;
-    final cardWidth = (isMobile ? 260.0 : 320.0) + 20.0;
-    _scrollController.animateTo(
-      index * cardWidth,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.easeInOut,
-    );
-  }
-
-  void _scrollPrev() {
-    if (_activeIndex > 0) _scrollTo(_activeIndex - 1);
-  }
-
-  void _scrollNext() {
-    if (_activeIndex < widget.certificates.length - 1) _scrollTo(_activeIndex + 1);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (widget.certificates.isEmpty) return const SizedBox.shrink();
+    if (certificates.isEmpty) return const SizedBox.shrink();
 
     final isMobile = Responsive.isMobile(context);
-    final allImages = widget.certificates.map((c) => c.imageUrl).toList();
-    final cardWidth = isMobile ? 260.0 : 320.0;
-    final canPrev = _activeIndex > 0;
-    final canNext = _activeIndex < widget.certificates.length - 1;
+    final allImages = certificates.map((c) => c.imageUrl).toList();
+    final cardHeight = isMobile ? 300.0 : 360.0;
 
     return Container(
       padding: EdgeInsets.symmetric(
@@ -109,114 +58,18 @@ class _CertificatesSectionState extends State<CertificatesSection> {
           ),
           const SizedBox(height: 48),
 
-          LayoutBuilder(
-            builder: (context, constraints) {
-              final listWidth = constraints.maxWidth;
-              final cardStep = cardWidth + 20.0;
-              final visibleCount = (listWidth / cardStep).floor().clamp(1, widget.certificates.length);
-              final pageCount = (widget.certificates.length - visibleCount + 1).clamp(1, widget.certificates.length);
-              final activeDot = _activeIndex.clamp(0, pageCount - 1);
-
-              return Column(
-                children: [
-                  // Horizontal list
-                  SizedBox(
-                    height: isMobile ? 300 : 360,
-                    child: ListView.separated(
-                      controller: _scrollController,
-                      scrollDirection: Axis.horizontal,
-                      clipBehavior: Clip.none,
-                      itemCount: widget.certificates.length,
-                      separatorBuilder: (_, __) => const SizedBox(width: 20),
-                      itemBuilder: (context, i) => _CertificateCard(
-                        item: widget.certificates[i],
-                        allImages: allImages,
-                        index: i,
-                        width: cardWidth,
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  // Controls row: prev · dots · next
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _ArrowButton(
-                        icon: Icons.arrow_back_ios_new_rounded,
-                        enabled: canPrev,
-                        onTap: _scrollPrev,
-                      ),
-                      const SizedBox(width: 20),
-                      ...List.generate(pageCount, (i) {
-                        final active = i == activeDot;
-                        return AnimatedContainer(
-                          duration: const Duration(milliseconds: 250),
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          width: active ? 24 : 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            color: active
-                                ? AppColors.primary
-                                : AppColors.primary.withValues(alpha: 0.25),
-                            borderRadius: BorderRadius.circular(99),
-                          ),
-                        );
-                      }),
-                      const SizedBox(width: 20),
-                      _ArrowButton(
-                        icon: Icons.arrow_forward_ios_rounded,
-                        enabled: canNext,
-                        onTap: _scrollNext,
-                      ),
-                    ],
-                  ),
-                ],
-              );
-            },
+          HorizontalCarousel(
+            itemCount: certificates.length,
+            cardWidth: 320,
+            mobileCardWidth: 260,
+            cardHeight: cardHeight,
+            itemBuilder: (context, i) => _CertificateCard(
+              item: certificates[i],
+              allImages: allImages,
+              index: i,
+            ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _ArrowButton extends StatelessWidget {
-  final IconData icon;
-  final bool enabled;
-  final VoidCallback onTap;
-
-  const _ArrowButton({
-    required this.icon,
-    required this.enabled,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: enabled ? onTap : null,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: enabled
-              ? AppColors.primary.withValues(alpha: 0.1)
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: enabled
-                ? AppColors.primary.withValues(alpha: 0.5)
-                : AppColors.primary.withValues(alpha: 0.15),
-          ),
-        ),
-        child: Icon(
-          icon,
-          size: 14,
-          color: enabled ? AppColors.primary : AppColors.primary.withValues(alpha: 0.25),
-        ),
       ),
     );
   }
@@ -226,13 +79,11 @@ class _CertificateCard extends StatefulWidget {
   final CertificateItem item;
   final List<String> allImages;
   final int index;
-  final double width;
 
   const _CertificateCard({
     required this.item,
     required this.allImages,
     required this.index,
-    required this.width,
   });
 
   @override
@@ -305,7 +156,6 @@ class _CertificateCardState extends State<_CertificateCard> {
         onTap: () => _openViewer(context),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          width: widget.width,
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(16),
