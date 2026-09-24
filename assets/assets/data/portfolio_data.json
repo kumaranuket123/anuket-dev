@@ -3,14 +3,14 @@
     "greeting": "Hi, I am",
     "name": "Anuket Kumar",
     "role": "Flutter Developer",
-    "description": "Flutter Developer with 3+ years of experience building cross-platform apps for international clients across sports-tech, fintech, smart-city, healthcare, and e-commerce. Expert in Clean Architecture, BLoC/Riverpod, real-time SSE systems, custom visualizations, and scalable monorepo design — consistently delivering polished, production-grade apps on Android, iOS, and Flutter Web.",
+    "description": "Flutter Developer with 3+ years of experience building cross-platform apps for international clients across sports-tech, fintech, smart-city, healthcare, and e-commerce. Expert in Clean Architecture, BLoC/Riverpod, real-time SSE systems, custom visualizations, and scalable monorepo design \u2014 consistently delivering polished, production-grade apps on Android, iOS, and Flutter Web.",
     "buttonText": "Check out my work!",
     "resumeLink": "https://drive.google.com/file/d/1Xr0fr_0vQCbzrBYYAE1I6LCgz6Ey43p0/view?usp=drivesdk",
-    "imagePath": "assets/images/my_pic.png"
+    "imagePath": "assets/images/my_pic.webp"
   },
   "about": {
     "sectionTitle": "About Me",
-    "description1": "I am a Flutter Developer with 3+ years of experience architecting and shipping production-grade cross-platform applications for international clients. My expertise spans Clean Architecture, BLoC/Riverpod state management, real-time data systems, and custom UI visualizations — delivering pixel-perfect apps across Android, iOS, and Flutter Web.",
+    "description1": "I am a Flutter Developer with 3+ years of experience architecting and shipping production-grade cross-platform applications for international clients. My expertise spans Clean Architecture, BLoC/Riverpod state management, real-time data systems, and custom UI visualizations \u2014 delivering pixel-perfect apps across Android, iOS, and Flutter Web.",
     "description2": "Beyond writing code, I actively lead code reviews, drive engineering best practices, and collaborate closely with designers, backend engineers, and QA in Agile sprints. I leverage AI tools like Claude and GitHub Copilot to shorten iteration cycles and continuously push the quality bar higher.",
     "skills": [
       "Flutter (Android, iOS, Web)",
@@ -26,7 +26,7 @@
       "Push Notifications & Geolocation",
       "Agile / Scrum"
     ],
-    "profileIcon": "assets/images/my_pic.png"
+    "profileIcon": "assets/images/my_pic.webp"
   },
   "skills": {
     "sectionTitle": "Skills & Technologies",
@@ -36,73 +36,166 @@
         "name": "Languages & Core",
         "icon": "code",
         "items": [
-          { "name": "Flutter", "level": 95 },
-          { "name": "Dart", "level": 95 },
-          { "name": "C++", "level": 70 },
-          { "name": "C", "level": 60 }
+          {
+            "name": "Flutter",
+            "level": 95
+          },
+          {
+            "name": "Dart",
+            "level": 95
+          },
+          {
+            "name": "C++",
+            "level": 70
+          },
+          {
+            "name": "C",
+            "level": 60
+          }
         ]
       },
       {
         "name": "State Management",
         "icon": "layers",
         "items": [
-          { "name": "BLoC / Cubit", "level": 90 },
-          { "name": "Riverpod", "level": 85 },
-          { "name": "Flutter Hooks", "level": 75 },
-          { "name": "StateNotifier", "level": 80 }
+          {
+            "name": "BLoC / Cubit",
+            "level": 90
+          },
+          {
+            "name": "Riverpod",
+            "level": 85
+          },
+          {
+            "name": "Flutter Hooks",
+            "level": 75
+          },
+          {
+            "name": "StateNotifier",
+            "level": 80
+          }
         ]
       },
       {
         "name": "Architecture & Patterns",
         "icon": "architecture",
         "items": [
-          { "name": "Clean Architecture", "level": 90 },
-          { "name": "Monorepo / Local Packages", "level": 85 },
-          { "name": "Multi-Flavor Builds", "level": 80 },
-          { "name": "Agile / Scrum", "level": 85 }
+          {
+            "name": "Clean Architecture",
+            "level": 90
+          },
+          {
+            "name": "Monorepo / Local Packages",
+            "level": 85
+          },
+          {
+            "name": "Multi-Flavor Builds",
+            "level": 80
+          },
+          {
+            "name": "Agile / Scrum",
+            "level": 85
+          }
         ]
       },
       {
         "name": "Backend & Database",
         "icon": "storage",
         "items": [
-          { "name": "Firebase", "level": 85 },
-          { "name": "Supabase", "level": 80 },
-          { "name": "Firestore", "level": 80 },
-          { "name": "SharedPreferences", "level": 85 },
-          { "name": "Hive", "level": 85 }
+          {
+            "name": "Firebase",
+            "level": 85
+          },
+          {
+            "name": "Supabase",
+            "level": 80
+          },
+          {
+            "name": "Firestore",
+            "level": 80
+          },
+          {
+            "name": "SharedPreferences",
+            "level": 85
+          },
+          {
+            "name": "Hive",
+            "level": 85
+          }
         ]
       },
       {
         "name": "Networking & APIs integration",
         "icon": "wifi",
         "items": [
-          { "name": "REST APIs", "level": 90 },
-          { "name": "SSE (Real-time)", "level": 85 },
-          { "name": "Dio / Interceptors", "level": 90 },
-          { "name": "JWT Auth", "level": 85 },
-          { "name": "dartz (Either)", "level": 80 }
+          {
+            "name": "REST APIs",
+            "level": 90
+          },
+          {
+            "name": "SSE (Real-time)",
+            "level": 85
+          },
+          {
+            "name": "Dio / Interceptors",
+            "level": 90
+          },
+          {
+            "name": "JWT Auth",
+            "level": 85
+          },
+          {
+            "name": "dartz (Either)",
+            "level": 80
+          }
         ]
       },
       {
         "name": "UI & Visualization",
         "icon": "palette",
         "items": [
-          { "name": "Custom Painters", "level": 85 },
-          { "name": "Animations / Lottie", "level": 80 },
-          { "name": "GoRouter", "level": 90 },
-          { "name": "Responsive Design", "level": 85 }
+          {
+            "name": "Custom Painters",
+            "level": 85
+          },
+          {
+            "name": "Animations / Lottie",
+            "level": 80
+          },
+          {
+            "name": "GoRouter",
+            "level": 90
+          },
+          {
+            "name": "Responsive Design",
+            "level": 85
+          }
         ]
       },
       {
         "name": "DevOps & Tooling",
         "icon": "build",
         "items": [
-          { "name": "GitHub Actions CI/CD", "level": 85 },
-          { "name": "FCM / Push Notifications", "level": 80 },
-          { "name": "Unit / Widget Testing", "level": 75 },
-          { "name": "Geolocation / Maps", "level": 75 },
-          { "name": "Deep Links", "level": 75 }
+          {
+            "name": "GitHub Actions CI/CD",
+            "level": 85
+          },
+          {
+            "name": "FCM / Push Notifications",
+            "level": 80
+          },
+          {
+            "name": "Unit / Widget Testing",
+            "level": 75
+          },
+          {
+            "name": "Geolocation / Maps",
+            "level": 75
+          },
+          {
+            "name": "Deep Links",
+            "level": 75
+          }
         ]
       }
     ]
@@ -116,12 +209,12 @@
         "duration": "April 2023 - Present",
         "location": "Remote",
         "description": [
-          "Architected and shipped 8+ production Flutter apps for international clients across sports-tech, fintech, smart-city, healthcare, and e-commerce — full lifecycle from design to Play Store / App Store release.",
-          "Designed and delivered Arena (client) — live cricket analytics with real-time Opta SSE streaming, custom-painted charts (wagon wheel, worm, manhattan), per-player stats, 6-package monorepo & multi-flavor builds.",
-          "Implemented Lend Mate — fintech P2P loan app with EMI scheduling, Supabase backend, payment proof & lender approval workflow, extra-payment recalculation, and GitHub Actions CI/CD (auto APK build to Google Drive on push to main).",
+          "Architected and shipped 8+ production Flutter apps for international clients across sports-tech, fintech, smart-city, healthcare, and e-commerce \u2014 full lifecycle from design to Play Store / App Store release.",
+          "Designed and delivered Arena (client) \u2014 live cricket analytics with real-time Opta SSE streaming, custom-painted charts (wagon wheel, worm, manhattan), per-player stats, 6-package monorepo & multi-flavor builds.",
+          "Implemented Lend Mate \u2014 fintech P2P loan app with EMI scheduling, Supabase backend, payment proof & lender approval workflow, extra-payment recalculation, and GitHub Actions CI/CD (auto APK build to Google Drive on push to main).",
           "Engineered Dio interceptor chains (JWT auto-refresh on 401, force-logout on expiry), established Clean Architecture with local package separation & multi-flavor configs; led code reviews driving 20% quality improvement and faster sprint cycles.",
           "Leveraged Claude & GitHub Copilot/Codex for scaffolding, architecture reviews & debugging, measurably shortening iteration cycles.",
-          "Collaborated with designers, backend engineers & QA in Agile sprints to deliver pixel-perfect UIs across Android, iOS & Flutter Web — spearheaded a flagship dashboard rebuild that boosted user engagement by 30%."
+          "Collaborated with designers, backend engineers & QA in Agile sprints to deliver pixel-perfect UIs across Android, iOS & Flutter Web \u2014 spearheaded a flagship dashboard rebuild that boosted user engagement by 30%."
         ]
       }
     ]
@@ -132,7 +225,7 @@
       {
         "institution": "B K Birla Institute of Engineering & Technology, Pilani",
         "degree": "B.Tech in Computer Science & Engineering",
-        "duration": "2019 – 2023",
+        "duration": "2019 \u2013 2023",
         "cgpa": "8.72"
       }
     ]
@@ -144,11 +237,11 @@
       {
         "id": "arena",
         "title": "Arena",
-        "description": "A real-time cricket analytics platform built for a client, featuring live ball-by-ball match streaming via SSE, advanced interactive charts (wagon wheel, worm, manhattan, ball-by-ball), detailed scorecards, and player analytics — all in a polished dark-first UI.",
-        "fullDescription": "Arena is a professional cricket analytics mobile app built for a sports-tech client. It streams live match data using Server-Sent Events from the Opta feed, handling both provisional delivery events (timeline_update) and authoritative score confirmations (scorecard_update). The app features custom-painted cricket visualizations, per-player batting and bowling analytics, playing XI lineups, and a multi-tab dashboard — delivering a comprehensive match experience for cricket fans.",
+        "description": "A real-time cricket analytics platform built for a client, featuring live ball-by-ball match streaming via SSE, advanced interactive charts (wagon wheel, worm, manhattan, ball-by-ball), detailed scorecards, and player analytics \u2014 all in a polished dark-first UI.",
+        "fullDescription": "Arena is a professional cricket analytics mobile app built for a sports-tech client. It streams live match data using Server-Sent Events from the Opta feed, handling both provisional delivery events (timeline_update) and authoritative score confirmations (scorecard_update). The app features custom-painted cricket visualizations, per-player batting and bowling analytics, playing XI lineups, and a multi-tab dashboard \u2014 delivering a comprehensive match experience for cricket fans.",
         "userHighlights": [
           "Follow live cricket matches ball-by-ball with instant delivery animations, pitch maps, and provisional scoring that updates to authoritative Opta data within seconds.",
-          "Explore interactive charts — wagon wheel, worm chart, manhattan chart, and ball-by-ball runs — to understand batting patterns and match momentum at a glance.",
+          "Explore interactive charts \u2014 wagon wheel, worm chart, manhattan chart, and ball-by-ball runs \u2014 to understand batting patterns and match momentum at a glance.",
           "View detailed scorecards with batting figures, bowling stats, fall of wickets, shot types, and fielding positions for every player.",
           "Browse the full playing XI lineup with player cards and career stats before and during a match.",
           "Switch between English and Spanish, and toggle light/dark mode from the profile settings.",
@@ -158,7 +251,7 @@
           "Implemented dual SSE event processing (timeline_update for immediate animations, scorecard_update for authoritative scores) with a lifecycle-aware connection manager that pauses on background and resumes on foreground.",
           "Built a custom-painter chart system with an extensible base architecture powering wagon wheel, worm, manhattan, and ball-by-ball visualizations without third-party charting libraries.",
           "Structured as a monorepo with six local packages (routing, flavor, locale, local_storage, common_components, network) to enforce separation of concerns and enable independent testing.",
-          "Applied Riverpod + StateNotifier state management with plain Dart copyWith() state classes — no code generation — for fast iteration and readable state transitions.",
+          "Applied Riverpod + StateNotifier state management with plain Dart copyWith() state classes \u2014 no code generation \u2014 for fast iteration and readable state transitions.",
           "Integrated a Dio interceptor chain with automatic token refresh on 401, graceful force-logout on refresh failure, and functional Either<Exception, T> error handling throughout the data layer.",
           "Configured multi-flavor builds (staging/production) with separate entry points, environment configs, and a draggable Talker debug overlay available only in staging."
         ],
@@ -192,12 +285,12 @@
         "androidDownloadLink": "https://drive.google.com/file/d/1HfOVLuyR63BY86QSVKjR6dI_EzGK68Ec/view?usp=drive_link",
         "iosDownloadLink": "",
         "screenshots": [
-          "assets/images/arena/arena_app.png",
-          "assets/images/arena/a1.png",
-          "assets/images/arena/a2.png",
-          "assets/images/arena/a3.png",
-          "assets/images/arena/a4.png",
-          "assets/images/arena/a5.png"
+          "assets/images/arena/arena_app.webp",
+          "assets/images/arena/a1.webp",
+          "assets/images/arena/a2.webp",
+          "assets/images/arena/a3.webp",
+          "assets/images/arena/a4.webp",
+          "assets/images/arena/a5.webp"
         ]
       },
       {
@@ -230,10 +323,9 @@
           "Deep Links",
           "Geolocation"
         ],
-        "imageUrl": "assets/images/subscribe_me/home.png",
+        "imageUrl": "assets/images/subscribe_me/home.webp",
         "androidDownloadLink": "https://play.google.com/store/apps/details?id=com.awrostamani.subscribeme&pcampaignid=web_share",
         "iosDownloadLink": ""
-
       }
     ],
     "personalProjectsTitle": "Personal Projects",
@@ -270,12 +362,12 @@
           "GitHub Actions CI/CD: automatic APK build and Google Drive upload on push to main."
         ],
         "screenshots": [
-          "assets/images/lendmate/dashboard-portrait.png",
-          "assets/images/lendmate/create_lone-portrait.png",
-          "assets/images/lendmate/lone_details-portrait.png",
-          "assets/images/lendmate/new_lone-portrait.png",
-          "assets/images/lendmate/notification-portrait.png",
-          "assets/images/lendmate/settings-portrait.png"
+          "assets/images/lendmate/dashboard-portrait.webp",
+          "assets/images/lendmate/create_lone-portrait.webp",
+          "assets/images/lendmate/lone_details-portrait.webp",
+          "assets/images/lendmate/new_lone-portrait.webp",
+          "assets/images/lendmate/notification-portrait.webp",
+          "assets/images/lendmate/settings-portrait.webp"
         ],
         "techStack": [
           "Flutter",
@@ -288,9 +380,9 @@
           "GitHub Actions"
         ],
         "githubLink": "https://github.com/kumaranuket123/lend_mate",
-        "androidDownloadLink": "https://drive.google.com/file/d/17GUaFjxBkvWt2KFHIW0zhkGKxfovxQ8k/view?usp=drive_link",
+        "androidDownloadLink": "https://play.google.com/store/apps/details?id=com.lendmate.app&pcampaignid=web_share",
         "iosDownloadLink": "",
-        "imageUrl": "assets/images/lendmate/dashboard-portrait.png"
+        "imageUrl": "assets/images/lendmate/dashboard-portrait.webp"
       },
       {
         "id": "maps-navigation",

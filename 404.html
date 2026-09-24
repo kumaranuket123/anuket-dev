@@ -58,21 +58,51 @@
       background-color: #0B0F19;
     }
 
-    /* Loading screen shown before Flutter boots */
+    /* Loading screen shown before Flutter boots.
+       Contains a static brand/tagline so the page has instant content
+       (perceived performance) instead of a blank dark screen. */
     #flutter-loading {
       position: fixed;
       inset: 0;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       background-color: #0B0F19;
       z-index: 9999;
       transition: opacity 0.3s ease;
+      padding: 24px;
+      box-sizing: border-box;
     }
 
     #flutter-loading.hidden {
       opacity: 0;
       pointer-events: none;
+    }
+
+    #flutter-loading .brand {
+      font-family: 'Fira Code', ui-monospace, Menlo, monospace;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 0.5px;
+      background: linear-gradient(90deg, #00F2FE, #4FACFE);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+
+    #flutter-loading .tagline {
+      font-family: 'Fira Code', ui-monospace, Menlo, monospace;
+      font-size: 13px;
+      color: #8B9BB4;
+      margin: 0 0 28px;
+    }
+
+    .loading-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .loading-dot {
@@ -95,11 +125,15 @@
 </head>
 
 <body>
-  <!-- Shown while Flutter initialises; hidden once the app is ready -->
+  <!-- Static brand shown instantly; hidden once Flutter boots -->
   <div id="flutter-loading">
-    <div class="loading-dot"></div>
-    <div class="loading-dot"></div>
-    <div class="loading-dot"></div>
+    <div class="brand">&gt;_ anuket</div>
+    <p class="tagline">Flutter&nbsp;Developer</p>
+    <div class="loading-row">
+      <div class="loading-dot"></div>
+      <div class="loading-dot"></div>
+      <div class="loading-dot"></div>
+    </div>
   </div>
 
   <script>
