@@ -331,6 +331,60 @@
     "personalProjectsTitle": "Personal Projects",
     "personalProjects": [
       {
+        "id": "usync",
+        "title": "Usync",
+        "description": "A private mobile app for two. Couples share a live drawing canvas, send touch that vibrates their partner's phone, share moods, keep memories and track special dates, all protected by end-to-end encryption.",
+        "fullDescription": "Usync is a private Android and iOS app (Flutter, portrait-only) for couples. It reminds both partners about the dates that matter and gives long-distance couples small, everyday ways to feel close: a live shared canvas, real-time touch that vibrates the partner's phone, shared moods, a question of the day, couple games, memories and a shared timeline. Moods, answers, drawings, pictures, location and timeline dates are end-to-end encrypted with a key only the two partners hold, and there are no ads or third-party analytics.",
+        "userHighlights": [
+          "Pair with your partner using Google sign-in and a 4-character invite code that expires after 24 hours.",
+          "Press and hold to make your partner's phone vibrate in real time, and draw together on a live shared canvas.",
+          "Share moods and see how in sync you were over the last 7 days; a partner's question-of-the-day answer stays hidden until you answer too.",
+          "Never miss a special date: countdowns and reminders for both partners, optionally repeating yearly.",
+          "Long-distance mode shows the distance apart and a shared 'next time we meet' countdown.",
+          "Works offline, adds an Android Live Doodle home-screen widget, and offers five themes, app lock and push notifications."
+        ],
+        "developerHighlights": [
+          "Clean architecture (domain, data, presentation) with BLoC state management, GetIt dependency injection and go_router navigation.",
+          "Supabase backend: Postgres with row-level security scoped per couple, Realtime, Storage, RPCs and Edge Functions. State changes go through RPCs rather than direct writes.",
+          "Presence, touch events and live canvas strokes share one private Realtime channel per couple; finished strokes are persisted to the database. Touch ends when the partner's Presence leaves, since Realtime has no disconnect hook.",
+          "Hidden-until-answered answers enforced server-side: a server function returns the partner's answer only once the caller has answered.",
+          "Push pipeline: a notification row insert fires a database trigger, which calls an Edge Function that sends the message through FCM.",
+          "Phased end-to-end encryption where the server only holds public keys and sealed values, and private keys stay in the device's secure store.",
+          "Fixed silent crashes in the home-screen widget's background sync in release builds by correcting a Supabase initialization check, registering plugins in the background handler and logging failures."
+        ],
+        "features": [
+          "Pairing with Google sign-in and expiring invite codes, one couple per account.",
+          "Real-time touch sync and a shared live drawing canvas.",
+          "Moods with 7-day sync insights, question of the day, and couple games: Tic-Tac-Toe, Would you rather, How well do you know me? and Conversation cards.",
+          "Memories, timeline and special dates, shared bucket list and daily streaks.",
+          "Together and Long-distance relationship modes with optional location sharing (the partner is always notified).",
+          "Push notifications, Android Live Doodle widget, offline support with sync on reconnect, and five themes.",
+          "End-to-end encryption, biometric or screen-lock app lock, no ads and no third-party analytics."
+        ],
+        "screenshots": [
+          "assets/images/usync/touch_sync.webp",
+          "assets/images/usync/mood.webp",
+          "assets/images/usync/canvas.webp",
+          "assets/images/usync/question_lock.webp",
+          "assets/images/usync/timeline.webp"
+        ],
+        "techStack": [
+          "Flutter",
+          "Dart",
+          "BLoC",
+          "GetIt",
+          "go_router",
+          "Supabase",
+          "Firebase Cloud Messaging",
+          "Hive"
+        ],
+        "githubLink": "https://github.com/kumaranuket123/usync",
+        "externalLink": "",
+        "androidDownloadLink": "https://drive.google.com/file/d/1TRvnxwQlQz8xuEn5t5AK5-2bnoFBC6q4/view?usp=drive_link",
+        "iosDownloadLink": "",
+        "imageUrl": "https://youtu.be/iwbysfeeNBg"
+      },
+      {
         "id": "lend-mate",
         "title": "Lend Mate",
         "description": "A fintech P2P loan management app with EMI scheduling, Supabase backend, payment proof & lender approval workflow, extra-payment recalculation, and GitHub Actions CI/CD that auto-builds an APK to Google Drive on every push to main.",
